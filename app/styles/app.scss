@@ -1,2 +1,29 @@
 
 @import "ember-cli-bootstrap-4/bootstrap";
+
+body {
+  background-color: black;
+}
+
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  margin: 20px;
+  color: white;
+}
+
+
+main {
+  display: flex;
+}
+
+section {
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
