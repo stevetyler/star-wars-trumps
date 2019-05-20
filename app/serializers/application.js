@@ -14,10 +14,10 @@ export default DS.JSONAPISerializer.extend({
   normalizeArrayResponse(store, primaryModelClass, payload) {
     let normalizedData = payload.results.map((record) => {
       let urlArr = record.url.split('/'); // use modelName instead if poss
-      let id = urlArr[urlArr.length - 2];
-      let data = this.normalize(primaryModelClass, record, id);
+      let id = parseInt(urlArr[urlArr.length - 2], 10); // get id from url eg ../people/1/
+      let { data } = this.normalize(primaryModelClass, record, id);
 
-      return { data };
+      return data;
     });
 
     return {
