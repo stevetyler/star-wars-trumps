@@ -7,8 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('starship');
-  this.route('person');
+  this.route('index', {path: '/'});
+  this.route('starships');
+  this.route('people');
+  this.route('loading');
 });
 
 export default Router;

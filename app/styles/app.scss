@@ -5,21 +5,16 @@ body {
   background-color: black;
 }
 
-
 header {
   display: flex;
   justify-content: center;
 }
 
-h1 {
+h1, h2 {
   margin: 20px;
   color: white;
 }
 
-
-main {
-  display: flex;
-}
 
 section {
   color: white;
