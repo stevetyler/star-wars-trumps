@@ -5,8 +5,6 @@ export default Component.extend({
   leftPlayerScore: 0,
   rightPlayerScore: 0,
 
-  currentModel: null,
-
   shuffledModel: computed('starships', function() {
     const array = this.starships.toArray();
 
