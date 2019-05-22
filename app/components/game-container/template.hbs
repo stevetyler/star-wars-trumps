@@ -3,15 +3,15 @@
     {{#each gameCollection as |starship i|}}
       <div class="col text-center">
         <h2>
-          {{#if i}}Computer : {{else}} Player 1 : {{/if}}
+          {{#if i}}Computer : {{else}} Player : {{/if}}
           {{unless i leftPlayerScore rightPlayerScore}}
         </h2>
 
         <div class="card mt-5">
           <div class="card-body">
-            <h4 class="card-title mb-2">{{starship.name}}</h4>
+            <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
             <ul class="list-unstyled">
-              <li class=" font-weight-bold">Crew : {{starship.crew}}</li>
+              <li class="font-weight-bold">Crew : {{starship.crew}}</li>
               <li class="">Length : {{starship.length}}</li>
               <li class="">Passengers : {{starship.passengers}}</li>
             </ul>
@@ -27,13 +27,13 @@
     {{#each gameCollection as |person i|}}
       <div class="col text-center">
         <h2>
-          {{#if i}}Computer : {{else}} Player 1 : {{/if}}
+          {{#if i}}Computer : {{else}} Player : {{/if}}
           {{unless i leftPlayerScore rightPlayerScore}}
         </h2>
 
         <div class="card mt-5">
           <div class="card-body">
-            <h4 class="card-title mb-2">{{person.name}}</h4>
+            <h3 class="card-title mb-2">{{person.name}}</h3>
             <ul class="list-unstyled">
               <li class="">Height : {{person.height}}</li>
               <li class=" font-weight-bold">Mass : {{person.mass}}</li>
@@ -47,7 +47,7 @@
 
 <div class="row">
   <div class="col text-center">
-    <span class="display-4 mt-5 display-block">{{result}}</span>
+    <p class="mt-5 display-block text-white">{{result}}</p>
   </div>
 </div>
 
