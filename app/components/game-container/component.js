@@ -12,7 +12,7 @@ export default Component.extend({
 
     if (leftScore > rightScore) {
       this.incrementProperty('leftPlayerScore');
-      this.set('result', 'Player 1 Wins');
+      this.set('result', 'Player Wins');
     }
     else if (leftScore < rightScore){
       this.incrementProperty('rightPlayerScore');
