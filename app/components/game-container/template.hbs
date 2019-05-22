@@ -2,14 +2,21 @@
   <div class="row">
     {{#each gameCollection as |starship i|}}
       <div class="col text-center">
-        <h2>Player {{i}} : {{unless i leftPlayerScore rightPlayerScore}}</h2>
+        <h2>
+          {{#if i}}Computer : {{else}} Player 1 : {{/if}}
+          {{unless i leftPlayerScore rightPlayerScore}}
+        </h2>
 
-        <ul class="list-unstyled">
-          <li class="text-white">{{starship.name}}</li>
-          <li class="text-white font-weight-bold">Crew : {{starship.crew}}</li>
-          <li class="text-white">Length : {{starship.length}}</li>
-          <li class="text-white">Passengers : {{starship.passengers}}</li>
-        </ul>
+        <div class="card mt-5">
+          <div class="card-body">
+            <h4 class="card-title mb-2">{{starship.name}}</h4>
+            <ul class="list-unstyled">
+              <li class=" font-weight-bold">Crew : {{starship.crew}}</li>
+              <li class="">Length : {{starship.length}}</li>
+              <li class="">Passengers : {{starship.passengers}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     {{/each}}
   </div>
@@ -19,13 +26,20 @@
   <div class="row">
     {{#each gameCollection as |person i|}}
       <div class="col text-center">
-        <h2>Player {{i}} : {{unless i leftPlayerScore rightPlayerScore}}</h2>
+        <h2>
+          {{#if i}}Computer : {{else}} Player 1 : {{/if}}
+          {{unless i leftPlayerScore rightPlayerScore}}
+        </h2>
 
-        <ul class="list-unstyled">
-          <li class="text-white">{{person.name}}</li>
-          <li class="text-white">Height : {{person.height}}</li>
-          <li class="text-white font-weight-bold">Mass : {{person.mass}}</li>
-        </ul>
+        <div class="card mt-5">
+          <div class="card-body">
+            <h4 class="card-title mb-2">{{person.name}}</h4>
+            <ul class="list-unstyled">
+              <li class="">Height : {{person.height}}</li>
+              <li class=" font-weight-bold">Mass : {{person.mass}}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     {{/each}}
   </div>
@@ -33,13 +47,13 @@
 
 <div class="row">
   <div class="col text-center">
-    <span class="">{{result}}</span>
+    <span class="display-4 mt-5 display-block">{{result}}</span>
   </div>
 </div>
 
 <div class="row">
   <div class="col text-center">
-    <button type="button" name="button" class="btn btn-light mt-5 mb-5" onclick={{action "pickRandom"}}>
+    <button type="button" name="button" class="btn btn-lg btn-light mt-5 mb-5" onclick={{action "pickRandom" model selectedAttr}}>
       PLAY
     </button>
   </div>
