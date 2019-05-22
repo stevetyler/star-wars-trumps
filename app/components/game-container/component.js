@@ -4,31 +4,26 @@ export default Component.extend({
   leftPlayerScore: 0,
   rightPlayerScore: 0,
   result: '',
-  selectedAttr: '',
-
   gameCollection: null,
 
-  _compareAttrs() {
-    const attr = this.selectedAttr;
-    const collection = this.gameCollection;
-
+  _compareAttrs(collection, attr) {
     const leftScore = parseFloat(collection[0].get(attr));
     const rightScore = parseFloat(collection[1].get(attr));
 
     if (leftScore > rightScore) {
       this.incrementProperty('leftPlayerScore');
-      this.set('result', 'Player 0 Wins!');
+      this.set('result', 'Player 1 Wins');
     }
     else if (leftScore < rightScore){
       this.incrementProperty('rightPlayerScore');
-      this.set('result', 'Player 1 Wins!');
+      this.set('result', 'Computer Wins');
     } else {
       this.set('result', 'Draw');
     }
   },
 
-  _shuffleModel() {
-    const array = this.model.toArray();
+  _shuffleModel(model) {
+    const array = model.toArray();
 
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -39,11 +34,12 @@ export default Component.extend({
   },
 
   actions: {
-    pickRandom() {
-      const shuffledModel = this._shuffleModel();
+    pickRandom(model, attr) {
+      const shuffledModel = this._shuffleModel(model);
+      const collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
+      this.set('gameCollection', collection);
 
-      this.set('gameCollection', [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')]);
-      this._compareAttrs();
+      this._compareAttrs(collection, attr);
     },
   }
 });
