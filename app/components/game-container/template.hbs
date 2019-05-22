@@ -1,0 +1,46 @@
+{{#if (eq game "starships")}}
+  <div class="row">
+    {{#each gameCollection as |starship i|}}
+      <div class="col text-center">
+        <h2>Player {{i}} : {{unless i leftPlayerScore rightPlayerScore}}</h2>
+
+        <ul class="list-unstyled">
+          <li class="text-white">{{starship.name}}</li>
+          <li class="text-white font-weight-bold">Crew : {{starship.crew}}</li>
+          <li class="text-white">Length : {{starship.length}}</li>
+          <li class="text-white">Passengers : {{starship.passengers}}</li>
+        </ul>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if (eq game "people")}}
+  <div class="row">
+    {{#each gameCollection as |person i|}}
+      <div class="col text-center">
+        <h2>Player {{i}} : {{unless i leftPlayerScore rightPlayerScore}}</h2>
+
+        <ul class="list-unstyled">
+          <li class="text-white">{{person.name}}</li>
+          <li class="text-white">Height : {{person.height}}</li>
+          <li class="text-white font-weight-bold">Mass : {{person.mass}}</li>
+        </ul>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+<div class="row">
+  <div class="col text-center">
+    <span class="">{{result}}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-center">
+    <button type="button" name="button" class="btn btn-light mt-5 mb-5" onclick={{action "pickRandom"}}>
+      PLAY
+    </button>
+  </div>
+</div>
