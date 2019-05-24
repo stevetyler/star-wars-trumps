@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
+import a11yAudit from 'ember-a11y-testing/test-support/audit';
 
 module('Integration | Component | game-container', function(hooks) {
   setupRenderingTest(hooks);
@@ -59,7 +60,7 @@ module('Integration | Component | game-container', function(hooks) {
       />
     `);
 
-    assert.expect(12);
+    assert.expect(13);
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Mass : 80');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Gender : male');
@@ -73,6 +74,10 @@ module('Integration | Component | game-container', function(hooks) {
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(3)').textContent.trim(), 'Height : 140');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Eye Colour : blue');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Birth Year : BBY40');
+
+    return a11yAudit(this.element).then(() => {
+      assert.ok(true, 'no a11y errors found!');
+    });
   });
 
   // test('it displays the correct winner', async function(assert) {
@@ -98,7 +103,7 @@ module('Integration | Component | game-container', function(hooks) {
       />
     `);
 
-    assert.expect(14);
+    assert.expect(15);
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Millenium Falcon');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Crew : 5');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Length : 300');
@@ -114,6 +119,10 @@ module('Integration | Component | game-container', function(hooks) {
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Hyperdrive Rating : 1');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Cost in Credits : 2000');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 10');
+
+    return a11yAudit(this.element).then(() => {
+      assert.ok(true, 'no a11y errors found!');
+    });
   });
 
   // test('it displays the correct winner', async function(assert) {
