@@ -20,7 +20,7 @@ module('Integration | Component | game-container', function(hooks) {
         cargo_capacity: '2000'
       }),
       EmberObject.create({
-        name: 'X Wing',
+        name: 'X Wing Fighter',
         crew: '1',
         length: '100',
         passengers: '1',
@@ -40,10 +40,22 @@ module('Integration | Component | game-container', function(hooks) {
       />
     `);
 
-    assert.equal(this.element.querySelector('h2').textContent.trim(), 'Player :');
+    assert.expect(14);
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Millenium Falcon');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Crew : 5');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Length : 300');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(3)').textContent.trim(), 'Passengers : 2');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(4)').textContent.trim(), 'Hyperdrive Rating : 3');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(5)').textContent.trim(), 'Cost in Credits : 10000');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 2000');
 
-    // assert left player attributes
-    // assert right player attributes
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'X Wing Fighter');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(1)').textContent.trim(), 'Crew : 1');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(2)').textContent.trim(), 'Length : 100');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(3)').textContent.trim(), 'Passengers : 1');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Hyperdrive Rating : 1');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Cost in Credits : 2000');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 10');
   });
 
   // test('it displays the correct winner', async function(assert) {
