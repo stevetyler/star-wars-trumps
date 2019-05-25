@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
@@ -90,5 +90,9 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
 
     assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins', 'Correct winner shown');
+
+    await click('.btn');
+
+    assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins', 'Correct winner still shows');
   });
 });
