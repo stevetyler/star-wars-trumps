@@ -1,31 +1,3 @@
-{{#if (eq game "starships")}}
-  <div class="row justify-content-center">
-    {{#each gameCollection as |starship i|}}
-      <div class="col col-md-5 text-center">
-        <h2>
-          {{#if i}}Computer : {{else}} Player : {{/if}}
-          {{unless i leftPlayerScore rightPlayerScore}}
-        </h2>
-
-        <div class="card mt-5">
-          <div class="card-body">
-            <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
-            
-            <ul class="list-unstyled">
-              <li class="font-weight-bold">Crew : {{starship.crew}}</li>
-              <li>Length : {{starship.length}}</li>
-              <li>Passengers : {{starship.passengers}}</li>
-              <li>Hyperdrive Rating : {{starship.hyperdrive_rating}}</li>
-              <li>Cost in Credits : {{starship.cost_in_credits}}</li>
-              <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-{{/if}}
-
 {{#if (eq game "people")}}
   <div class="row justify-content-center">
     {{#each gameCollection as |person i|}}
@@ -44,6 +16,34 @@
               <li class="font-weight-bold">Height : {{person.height}}</li>
               <li>Eye Colour : {{person.eye_color}}</li>
               <li>Birth Year : {{person.birth_year}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if (eq game "starships")}}
+  <div class="row justify-content-center">
+    {{#each gameCollection as |starship i|}}
+      <div class="col col-md-5 text-center">
+        <h2>
+          {{#if i}}Computer : {{else}} Player : {{/if}}
+          {{unless i leftPlayerScore rightPlayerScore}}
+        </h2>
+
+        <div class="card mt-5">
+          <div class="card-body">
+            <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
+
+            <ul class="list-unstyled">
+              <li class="font-weight-bold">Crew : {{starship.crew}}</li>
+              <li>Length : {{starship.length}}</li>
+              <li>Passengers : {{starship.passengers}}</li>
+              <li>Hyperdrive Rating : {{starship.hyperdrive_rating}}</li>
+              <li>Cost in Credits : {{starship.cost_in_credits}}</li>
+              <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
             </ul>
           </div>
         </div>
