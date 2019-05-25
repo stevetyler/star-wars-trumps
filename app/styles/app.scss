@@ -5,11 +5,6 @@ body {
   background-color: black;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-}
-
 h1, h2 {
   margin: 20px;
   color: white;
@@ -17,10 +12,4 @@ h1, h2 {
 
 p {
   font-size: 40px;
-}
-
-section {
-  display: flex;
-  justify-content: center;
-  width: 50%;
 }
