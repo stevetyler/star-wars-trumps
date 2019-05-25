@@ -83,6 +83,12 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
         @keepModelOrder=true
       />
     `);
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
+
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
+
     assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins', 'Correct winner shown');
   });
 });
