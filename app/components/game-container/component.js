@@ -5,6 +5,13 @@ export default Component.extend({
   rightPlayerScore: 0,
   result: '',
   gameCollection: null,
+  keepModelOrder: false, // needed for tests
+
+  init() {
+    this._super(...arguments);
+
+    this.send('play', this.model, this.selectedAttr);
+  },
 
   _compareAttrs(collection, attr) {
     const leftScore = parseFloat(collection[0].get(attr));
@@ -34,9 +41,16 @@ export default Component.extend({
   },
 
   actions: {
-    pickRandom(model, attr) {
-      const shuffledModel = this._shuffleModel(model);
-      const collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
+    play(model, attr) {
+      let collection;
+
+      if (this.keepModelOrder) {
+        collection = model.toArray();
+      }
+      else {
+        const shuffledModel = this._shuffleModel(model);
+        collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
+      }
       this.set('gameCollection', collection);
 
       this._compareAttrs(collection, attr);
