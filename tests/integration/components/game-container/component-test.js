@@ -4,6 +4,8 @@ import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
+import { A } from '@ember/array';
+import ArrayProxy from '@ember/array/proxy';
 
 module('Integration | Component | game-container', function(hooks) {
   setupRenderingTest(hooks);
@@ -48,9 +50,17 @@ module('Integration | Component | game-container', function(hooks) {
     })
   ];
 
+  const peopleModel = ArrayProxy.create({
+    content: A(people)
+  });
+
+  const starshipsModel = ArrayProxy.create({
+    content: A(starships)
+  });
+
   // PEOPLE
   test('it displays people correctly', async function(assert) {
-    this.set('collection', people);
+    this.set('collection', peopleModel);
 
     await render(hbs`
       <GameContainer
@@ -93,7 +103,7 @@ module('Integration | Component | game-container', function(hooks) {
 
   // STARSHIPS
   test('it displays starships correctly', async function(assert) {
-    this.set('collection', starships);
+    this.set('collection', starshipsModel);
 
     await render(hbs`
       <GameContainer
