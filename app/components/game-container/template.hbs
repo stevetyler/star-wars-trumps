@@ -3,8 +3,8 @@
     {{#each gameCollection as |person i|}}
       <div class="col col-md-5 text-center">
         <h2>
-          {{#if i}}Computer : {{else}} Player : {{/if}}
-          {{unless i leftPlayerScore rightPlayerScore}}
+          <span>{{#if i}}Computer : {{else}} Player : {{/if}}</span>
+          <span>{{unless i leftPlayerScore rightPlayerScore}}</span>
         </h2>
 
         <div class="card mt-5">
