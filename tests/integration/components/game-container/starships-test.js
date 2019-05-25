@@ -7,27 +7,8 @@ import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import { A } from '@ember/array';
 import ArrayProxy from '@ember/array/proxy';
 
-module('Integration | Component | game-container', function(hooks) {
+module('Integration | Component | Game Container | Starships', function(hooks) {
   setupRenderingTest(hooks);
-
-  const people = [
-    EmberObject.create({
-      name: 'Obi Wan',
-      height: '160',
-      mass: '80',
-      eye_color: 'blue',
-      birth_year: 'BBY60',
-      gender: 'male'
-    }),
-    EmberObject.create({
-      name: 'Luke Skywalker',
-      height: '170',
-      mass: '60',
-      eye_color: 'blue',
-      birth_year: 'BBY40',
-      gender: 'male'
-    })
-  ];
 
   const starships = [
     EmberObject.create({
@@ -50,64 +31,10 @@ module('Integration | Component | game-container', function(hooks) {
     })
   ];
 
-  const peopleModel = ArrayProxy.create({
-    content: A(people)
-  });
-
   const starshipsModel = ArrayProxy.create({
     content: A(starships)
   });
 
-  // PEOPLE
-  test('it displays people correctly', async function(assert) {
-    this.set('collection', peopleModel);
-
-    // keep model order so that collection is not shuffled in tests
-    await render(hbs`
-      <GameContainer
-        @game="people"
-        @selectedAttr="height"
-        @model={{collection}}
-        @keepModelOrder=true
-      />
-    `);
-
-    assert.expect(13);
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Mass : 80', 'Correct mass is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Gender : male', 'Correct gender is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(3)').textContent.trim(), 'Height : 160', 'Correct height is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(4)').textContent.trim(), 'Eye Colour : blue', 'Correct eye colour is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(5)').textContent.trim(), 'Birth Year : BBY60', 'Correct bith year is shown');
-
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'Luke Skywalker', 'Correct name is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(1)').textContent.trim(), 'Mass : 60', 'Correct mass is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(2)').textContent.trim(), 'Gender : male', 'Correct gender is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(3)').textContent.trim(), 'Height : 170', 'Correct height is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Eye Colour : blue', 'Correct eye colour is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Birth Year : BBY40', 'Correct birth year is shown');
-
-    return a11yAudit(this.element).then(() => {
-      assert.ok(true, 'no a11y errors found!');
-    });
-  });
-
-  test('it displays the correct winner', async function(assert) {
-    this.set('collection', peopleModel);
-
-    await render(hbs`
-      <GameContainer
-        @game="people"
-        @selectedAttr="height"
-        @model={{collection}}
-        @keepModelOrder=true
-      />
-    `);
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Computer Wins', 'Correct winner shown');
-  });
-
-
-  // STARSHIPS
   test('it displays starships correctly', async function(assert) {
     this.set('collection', starshipsModel);
 
@@ -141,7 +68,7 @@ module('Integration | Component | game-container', function(hooks) {
     assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 10', 'Correct capacity is shown');
 
     return a11yAudit(this.element).then(() => {
-      assert.ok(true, 'no a11y errors found!');
+      assert.ok(true, 'No a11y errors found!');
     });
   });
 
