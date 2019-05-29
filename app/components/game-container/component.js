@@ -10,7 +10,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.send('play', this.model, this.selectedAttr);
+    this.send('deal', this.model);
   },
 
   _compareAttrs(collection, attr) {
@@ -31,23 +31,25 @@ export default Component.extend({
 
   actions: {
     deal(shuffledModel) {
-      const dealtCards = shuffledModel.reduce((arr, model, i) => {
+      const dealtCards = shuffledModel.reduce(function(acc, model, i) {
+        debugger;
         if (i % 2 === 0) {
-          return arr.push(new Array(shuffledModel[i], shuffledModel[i+1]));
+          return acc.pushObjects([shuffledModel.get(i), shuffledModel.get(i+1)]);
         }
       }, []);
+      debugger;
       this.set('dealtCards', dealtCards);
     },
     play(model, attr) {
       let collection;
 
-      if (this.keepModelOrder) {
-        collection = model.toArray();
-      }
-      else {
-        const shuffledModel = this._shuffleModel(model);
-        collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
-      }
+      // if (this.keepModelOrder) {
+      //   collection = model.toArray();
+      // }
+      // else {
+      //   const shuffledModel = this._shuffleModel(model);
+      //   collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
+      // }
       this.set('gameCollection', collection);
 
       this._compareAttrs(collection, attr);
