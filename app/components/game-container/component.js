@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import {A} from '@ember/array';
 
 export default Component.extend({
   leftPlayerScore: 0,
@@ -31,28 +32,26 @@ export default Component.extend({
 
   actions: {
     deal(shuffledModel) {
-      const dealtCards = shuffledModel.reduce(function(acc, model, i) {
-        debugger;
+      const nativeArr = [];
+
+      for (let i = 0; i < shuffledModel.length; i++) {
+        nativeArr.push(shuffledModel.get(i));
+      }
+
+      const dealtCards = nativeArr.reduce(function(acc, model, i) {
         if (i % 2 === 0) {
-          return acc.pushObjects([shuffledModel.get(i), shuffledModel.get(i+1)]);
+          acc.push(A([nativeArr[i], nativeArr[i+1]]));
+          return acc;
         }
       }, []);
-      debugger;
+
       this.set('dealtCards', dealtCards);
     },
+
     play(model, attr) {
-      let collection;
-
-      // if (this.keepModelOrder) {
-      //   collection = model.toArray();
-      // }
-      // else {
-      //   const shuffledModel = this._shuffleModel(model);
-      //   collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
-      // }
-      this.set('gameCollection', collection);
-
-      this._compareAttrs(collection, attr);
+      const collection = this.get('dealtCards');
+      debugger;
+      this._compareAttrs(collection[0], attr);
     },
   }
 });
