@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import {A} from '@ember/array';
 
 export default Component.extend({
+  gameCount: 0,
   leftPlayerScore: 0,
   rightPlayerScore: 0,
   result: '',
@@ -11,7 +12,8 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.send('deal', this.model);
+    this._deal(this.model);
+    this.send('play', this.model, this.selectedAttr);
   },
 
   _compareAttrs(collection, attr) {
@@ -28,30 +30,37 @@ export default Component.extend({
     } else {
       this.set('result', 'Draw');
     }
+    this.incrementProperty('gameCount');
+  },
+
+  _deal(shuffledModel) {
+    const nativeArr = [];
+
+    for (let i = 0; i < shuffledModel.length; i++) {
+      nativeArr.push(shuffledModel.get(i));
+    }
+
+    const dealtCards = nativeArr.reduce(function(acc, model, i) {
+      if (i % 2 === 0) {
+        acc.push(A([nativeArr[i], nativeArr[i+1]]));
+      }
+      return acc;
+    }, []);
+
+    this.set('dealtCards', dealtCards);
   },
 
   actions: {
-    deal(shuffledModel) {
-      const nativeArr = [];
-
-      for (let i = 0; i < shuffledModel.length; i++) {
-        nativeArr.push(shuffledModel.get(i));
-      }
-
-      const dealtCards = nativeArr.reduce(function(acc, model, i) {
-        if (i % 2 === 0) {
-          acc.push(A([nativeArr[i], nativeArr[i+1]]));
-          return acc;
-        }
-      }, []);
-
-      this.set('dealtCards', dealtCards);
-    },
-
-    play(model, attr) {
+    play(shuffledModel, attr) {
       const collection = this.get('dealtCards');
-      debugger;
-      this._compareAttrs(collection[0], attr);
-    },
+      const game = this.gameCount;
+
+      if (game < collection.length) {
+        this.set('gameCollection', collection[game]);
+        this._compareAttrs(collection[game], attr);
+      } else {
+        this.refreshRoute();
+      }
+    }
   }
 });
