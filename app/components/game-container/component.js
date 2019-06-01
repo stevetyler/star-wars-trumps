@@ -6,6 +6,7 @@ export default Component.extend({
   result: '',
   gamePair: null,
   keepModelOrder: false, // needed for tests
+  hideComputerCard: true,
 
   init() {
     this._super(...arguments);
@@ -13,9 +14,8 @@ export default Component.extend({
     this._deal(this.model);
 
     const collection = this.get('dealtCards');
-    const game = this.gameCount;
 
-    this.set('gamePair', collection[game]);
+    this.set('gamePair', collection[0]);
   },
 
   _compareAttrs(collection, attr) {
@@ -24,15 +24,14 @@ export default Component.extend({
 
     if (leftScore > rightScore) {
       this.incrementProperty('leftPlayerScore');
-      this.set('result', 'Player Wins');
+      this.set('result', 'Player Wins!');
     }
     else if (leftScore < rightScore){
       this.incrementProperty('rightPlayerScore');
-      this.set('result', 'Computer Wins');
+      this.set('result', 'Computer Wins!');
     } else {
       this.set('result', 'Draw');
     }
-    this.incrementProperty('gameCount');
   },
 
   _deal(shuffledModel) {
@@ -55,14 +54,24 @@ export default Component.extend({
   actions: {
     play(shuffledModel, attr) {
       const collection = this.get('dealtCards');
-      const game = this.gameCount;
 
-      if (game < collection.length) {
-        this.set('gamePair', collection[game]);
-        this._compareAttrs(collection[game], attr);
-      } else {
-        this.refreshRoute();
-      }
+      this.set('hideComputerCard', false);
+
+      this._compareAttrs(collection[this.gameCount], attr);
+
+      setTimeout(() => {
+        this.set('hideComputerCard', true);
+        this.set('result', '');
+
+        if (this.gameCount < collection.length) {
+          this.incrementProperty('gameCount');
+          if (this.gameCount === collection.length) {
+            this.refreshRoute();
+          } else {
+            this.set('gamePair', collection[this.gameCount]);
+          }
+        }
+      }, 3000);
     }
   }
 });

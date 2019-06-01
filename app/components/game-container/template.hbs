@@ -7,16 +7,18 @@
           <span>{{unless i leftPlayerScore rightPlayerScore}}</span>
         </h2>
 
-        <div class="card mt-5">
-          <div class="card-body">
-            <h3 class="card-title mb-2">{{person.name}}</h3>
-            <ul class="list-unstyled">
-              <li>Mass : {{person.mass}}</li>
-              <li>Gender : {{person.gender}}</li>
-              <li class="font-weight-bold">Height : {{person.height}}</li>
-              <li>Eye Colour : {{person.eye_color}}</li>
-              <li>Birth Year : {{person.birth_year}}</li>
-            </ul>
+        <div class={{if (and i hideComputerCard) "d-none"}}>
+          <div class="card mt-5">
+            <div class="card-body">
+              <h3 class="card-title mb-2">{{person.name}}</h3>
+              <ul class="list-unstyled">
+                <li>Mass : {{person.mass}}</li>
+                <li>Gender : {{person.gender}}</li>
+                <li class="font-weight-bold">Height : {{person.height}}</li>
+                <li>Eye Colour : {{person.eye_color}}</li>
+                <li>Birth Year : {{person.birth_year}}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -33,18 +35,20 @@
           <span>{{unless i leftPlayerScore rightPlayerScore}}</span>
         </h2>
 
-        <div class="card mt-5">
-          <div class="card-body">
-            <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
+        <div class={{if (and i hideComputerCard) "d-none"}}>
+          <div class="card mt-5">
+            <div class="card-body">
+              <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
 
-            <ul class="list-unstyled">
-              <li class="font-weight-bold">Crew : {{starship.crew}}</li>
-              <li>Length : {{starship.length}}</li>
-              <li>Passengers : {{starship.passengers}}</li>
-              <li>Hyperdrive Rating : {{starship.hyperdrive_rating}}</li>
-              <li>Cost in Credits : {{starship.cost_in_credits}}</li>
-              <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
-            </ul>
+              <ul class="list-unstyled">
+                <li class="font-weight-bold">Crew : {{starship.crew}}</li>
+                <li>Length : {{starship.length}}</li>
+                <li>Passengers : {{starship.passengers}}</li>
+                <li>Hyperdrive Rating : {{starship.hyperdrive_rating}}</li>
+                <li>Cost in Credits : {{starship.cost_in_credits}}</li>
+                <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -54,14 +58,16 @@
 
 <div class="row">
   <div class="col text-center">
-    <button type="button" name="button" class="btn btn-lg btn-light mt-5 mb-5" onclick={{action "play" shuffledModel selectedAttr}}>
-      PLAY
-    </button>
+    <div class={{unless hideComputerCard "d-none"}}>
+      <button type="button" name="button" class="btn btn-lg btn-light mt-5 mb-5" onclick={{action "play" shuffledModel selectedAttr}}>
+        PLAY
+      </button>
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col text-center">
-    <p class="display-block text-white">{{result}}</p>
+    <p class="display-block text-white mt-5">{{result}}</p>
   </div>
 </div>
