@@ -7,10 +7,5 @@ export default Route.extend({
     const pageNum = getRandomInt(1, 8);
 
     return this.store.query('person', {page: pageNum});
-  },
-  actions: {
-    refreshRoute() {
-      this.refresh();
-    }
   }
 });
