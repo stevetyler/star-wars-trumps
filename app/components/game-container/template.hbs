@@ -7,9 +7,9 @@
           <span>{{unless i leftPlayerScore rightPlayerScore}}</span>
         </h2>
 
-        <div class={{if (and i hideComputerCard) "d-none"}}>
-          <div class="card mt-5">
-            <div class="card-body">
+        <div class="card mt-5">
+          <div class="card-body">
+            {{#if (not (and i hideComputerCard))}}
               <h3 class="card-title mb-2">{{person.name}}</h3>
               <ul class="list-unstyled">
                 <li>Mass : {{person.mass}}</li>
@@ -18,7 +18,16 @@
                 <li>Eye Colour : {{person.eye_color}}</li>
                 <li>Birth Year : {{person.birth_year}}</li>
               </ul>
-            </div>
+            {{else}}
+              <h3 class="card-title mb-2">?</h3>
+              <ul class="list-unstyled">
+                <li>Mass : ?</li>
+                <li>Gender : ?</li>
+                <li class="font-weight-bold">Height : ?</li>
+                <li>Eye Colour : ?</li>
+                <li>Birth Year : ?</li>
+              </ul>
+            {{/if}}
           </div>
         </div>
       </div>
@@ -35,9 +44,9 @@
           <span>{{unless i leftPlayerScore rightPlayerScore}}</span>
         </h2>
 
-        <div class={{if (and i hideComputerCard) "d-none"}}>
-          <div class="card mt-5">
-            <div class="card-body">
+        <div class="card mt-5">
+          <div class="card-body">
+            {{#if (not (and i hideComputerCard))}}
               <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
 
               <ul class="list-unstyled">
@@ -48,7 +57,18 @@
                 <li>Cost in Credits : {{starship.cost_in_credits}}</li>
                 <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
               </ul>
-            </div>
+            {{else}}
+              <h3 class="card-title mb-2 font-weight-bold">?</h3>
+
+              <ul class="list-unstyled">
+                <li class="font-weight-bold">Crew : ?</li>
+                <li>Length : ?</li>
+                <li>Passengers : ?</li>
+                <li>Hyperdrive Rating : ?</li>
+                <li>Cost in Credits : ?</li>
+                <li>Cargo Capacity : ?</li>
+              </ul>
+            {{/if}}
           </div>
         </div>
       </div>
