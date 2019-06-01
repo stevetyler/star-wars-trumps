@@ -4,7 +4,7 @@ import {A} from '@ember/array';
 export default Component.extend({
   gameCount: 0,
   result: '',
-  gameCollection: null,
+  gamePair: null,
   keepModelOrder: false, // needed for tests
 
   init() {
@@ -54,7 +54,7 @@ export default Component.extend({
       const game = this.gameCount;
 
       if (game < collection.length) {
-        this.set('gameCollection', collection[game]);
+        this.set('gamePair', collection[game]);
         this._compareAttrs(collection[game], attr);
       } else {
         this.refreshRoute();
