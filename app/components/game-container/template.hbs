@@ -54,14 +54,14 @@
 
 <div class="row">
   <div class="col text-center">
-    <p class="mt-5 display-block text-white">{{result}}</p>
+    <button type="button" name="button" class="btn btn-lg btn-light mt-5 mb-5" onclick={{action "play" shuffledModel selectedAttr}}>
+      PLAY
+    </button>
   </div>
 </div>
 
 <div class="row">
   <div class="col text-center">
-    <button type="button" name="button" class="btn btn-lg btn-light mt-5 mb-5" onclick={{action "play" shuffledModel selectedAttr}}>
-      PLAY
-    </button>
+    <p class="display-block text-white">{{result}}</p>
   </div>
 </div>

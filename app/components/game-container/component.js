@@ -11,7 +11,11 @@ export default Component.extend({
     this._super(...arguments);
 
     this._deal(this.model);
-    this.send('play', this.model, this.selectedAttr);
+
+    const collection = this.get('dealtCards');
+    const game = this.gameCount;
+
+    this.set('gamePair', collection[game]);
   },
 
   _compareAttrs(collection, attr) {
