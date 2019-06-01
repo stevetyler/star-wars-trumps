@@ -3,8 +3,6 @@ import {A} from '@ember/array';
 
 export default Component.extend({
   gameCount: 0,
-  leftPlayerScore: 0,
-  rightPlayerScore: 0,
   result: '',
   gameCollection: null,
   keepModelOrder: false, // needed for tests
