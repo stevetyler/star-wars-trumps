@@ -11,22 +11,46 @@
           <div class="card-body">
             {{#if (not (and i hideComputerCard))}}
               <h3 class="card-title mb-2">{{person.name}}</h3>
-              <ul class="list-unstyled">
-                <li>Mass : {{person.mass}}</li>
-                <li>Gender : {{person.gender}}</li>
-                <li class="font-weight-bold">Height : {{person.height}}</li>
-                <li>Eye Colour : {{person.eye_color}}</li>
-                <li>Birth Year : {{person.birth_year}}</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Gender</th><td>{{person.gender}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Eye Colour</th><td>{{person.eye_color}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style="width: 50%">Mass</th><td style="width: 50%">{{person.mass}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Height</th><td>{{person.height}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Birth Year</th><td>{{person.birth_year}}</td>
+                  </tr>
+                </tbody>
+              </table>
             {{else}}
               <h3 class="card-title mb-2">?</h3>
-              <ul class="list-unstyled">
-                <li>Mass : ?</li>
-                <li>Gender : ?</li>
-                <li class="font-weight-bold">Height : ?</li>
-                <li>Eye Colour : ?</li>
-                <li>Birth Year : ?</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Gender</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Eye Colour</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" style="width: 50%">Mass</th><td style="width: 50%">?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Height</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Birth Year</th><td>?</td>
+                  </tr>
+                </tbody>
+              </table>
             {{/if}}
           </div>
         </div>
