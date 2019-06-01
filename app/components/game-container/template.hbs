@@ -11,22 +11,46 @@
           <div class="card-body">
             {{#if (not (and i hideComputerCard))}}
               <h3 class="card-title mb-2">{{person.name}}</h3>
-              <ul class="list-unstyled">
-                <li>Mass : {{person.mass}}</li>
-                <li>Gender : {{person.gender}}</li>
-                <li class="font-weight-bold">Height : {{person.height}}</li>
-                <li>Eye Colour : {{person.eye_color}}</li>
-                <li>Birth Year : {{person.birth_year}}</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 50%">Gender</th><td style="width: 50%">{{person.gender}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Eye Colour</th><td>{{person.eye_color}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Mass</th><td>{{person.mass}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Height</th><td>{{person.height}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Birth Year</th><td>{{person.birth_year}}</td>
+                  </tr>
+                </tbody>
+              </table>
             {{else}}
               <h3 class="card-title mb-2">?</h3>
-              <ul class="list-unstyled">
-                <li>Mass : ?</li>
-                <li>Gender : ?</li>
-                <li class="font-weight-bold">Height : ?</li>
-                <li>Eye Colour : ?</li>
-                <li>Birth Year : ?</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 50%">Gender</th><td style="width: 50%">?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Eye Colour</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Mass</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Height</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Birth Year</th><td>?</td>
+                  </tr>
+                </tbody>
+              </table>
             {{/if}}
           </div>
         </div>
@@ -49,25 +73,53 @@
             {{#if (not (and i hideComputerCard))}}
               <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
 
-              <ul class="list-unstyled">
-                <li class="font-weight-bold">Crew : {{starship.crew}}</li>
-                <li>Length : {{starship.length}}</li>
-                <li>Passengers : {{starship.passengers}}</li>
-                <li>Hyperdrive Rating : {{starship.hyperdrive_rating}}</li>
-                <li>Cost in Credits : {{starship.cost_in_credits}}</li>
-                <li>Cargo Capacity : {{starship.cargo_capacity}}</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 50%">Crew</th><td style="width: 50%">{{starship.crew}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Length</th><td>{{starship.length}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Passengers</th><td>{{starship.passengers}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hyperdrive Rating</th><td>{{starship.hyperdrive_rating}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cost in Credits</th><td>{{starship.cost_in_credits}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cargo Capacity</th><td>{{starship.cargo_capacity}}</td>
+                  </tr>
+                </tbody>
+              </table>
             {{else}}
               <h3 class="card-title mb-2 font-weight-bold">?</h3>
 
-              <ul class="list-unstyled">
-                <li class="font-weight-bold">Crew : ?</li>
-                <li>Length : ?</li>
-                <li>Passengers : ?</li>
-                <li>Hyperdrive Rating : ?</li>
-                <li>Cost in Credits : ?</li>
-                <li>Cargo Capacity : ?</li>
-              </ul>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row" style="width: 50%">Crew</th><td style="width: 50%">?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Length</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Passengers</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Hyperdrive Rating</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cost in Credits</th><td>?</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cargo Capacity</th><td>?</td>
+                  </tr>
+                </tbody>
+              </table>
             {{/if}}
           </div>
         </div>
