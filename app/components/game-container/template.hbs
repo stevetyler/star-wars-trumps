@@ -14,7 +14,7 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th scope="row" style="width: 50%">Gender</th><td style="width: 50%">{{person.gender}}</td>
+                    <th scope="row">Gender</th><td>{{person.gender}}</td>
                   </tr>
                   <tr>
                     <th scope="row">Eye Colour</th><td>{{person.eye_color}}</td>
@@ -23,7 +23,7 @@
                     <th scope="row">Mass</th><td>{{person.mass}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Height</th><td>{{person.height}}</td>
+                    <th scope="row">Height</th><td class="font-weight-bold"><span class="badge badge-dark">{{person.height}}</span></td>
                   </tr>
                   <tr>
                     <th scope="row">Birth Year</th><td>{{person.birth_year}}</td>
@@ -35,7 +35,7 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th scope="row" style="width: 50%">Gender</th><td style="width: 50%">?</td>
+                    <th scope="row">Gender</th><td>?</td>
                   </tr>
                   <tr>
                     <th scope="row">Eye Colour</th><td>?</td>
@@ -76,22 +76,22 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th scope="row" style="width: 50%">Crew</th><td style="width: 50%">{{starship.crew}}</td>
+                    <th scope="row">Crew</th><td>{{starship.crew}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Length</th><td>{{starship.length}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Passengers</th><td>{{starship.passengers}}</td>
+                    <th scope="row">Length</th><td class="font-weight-bold"><span class="badge badge-dark">{{starship.length}}</span></td>
                   </tr>
                   <tr>
                     <th scope="row">Hyperdrive Rating</th><td>{{starship.hyperdrive_rating}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Cost in Credits</th><td>{{starship.cost_in_credits}}</td>
+                    <th scope="row">Passengers</th><td>{{pow starship.passengers}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Cargo Capacity</th><td>{{starship.cargo_capacity}}</td>
+                    <th scope="row">Cost in Credits</th><td>{{pow starship.cost_in_credits}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cargo Capacity</th><td>{{pow starship.cargo_capacity}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -101,7 +101,7 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th scope="row" style="width: 50%">Crew</th><td style="width: 50%">?</td>
+                    <th scope="row">Crew</th><td>?</td>
                   </tr>
                   <tr>
                     <th scope="row">Length</th><td>?</td>
