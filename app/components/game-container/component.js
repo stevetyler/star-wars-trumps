@@ -7,6 +7,8 @@ export default Component.extend({
   gamePair: null,
   keepModelOrder: false, // needed for tests
   hideComputerCard: true,
+  isLeftWinner: false,
+  isRightWinner: false,
 
   init() {
     this._super(...arguments);
@@ -24,10 +26,12 @@ export default Component.extend({
 
     if (leftScore > rightScore) {
       this.incrementProperty('leftPlayerScore');
+      this.set('isLeftWinner', true);
       this.set('result', 'Player Wins!');
     }
     else if (leftScore < rightScore){
       this.incrementProperty('rightPlayerScore');
+      this.set('isRightWinner', true);
       this.set('result', 'Computer Wins!');
     } else {
       this.set('result', 'Draw');
@@ -69,6 +73,8 @@ export default Component.extend({
             this.refreshRoute();
           } else {
             this.set('gamePair', collection[this.gameCount]);
+            this.set('isLeftWinner', false);
+            this.set('isRightWinner', false);
           }
         }
       }, 3000);
