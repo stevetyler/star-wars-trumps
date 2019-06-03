@@ -5,12 +5,58 @@ body {
   background-color: black;
 }
 
+h1, h2, h3 {
+  color: #ffe44c;
+
+  a, a:hover, a:visited, a:focus, a:active {
+    color: #ffe44c;
+  }
+}
+
+h2, h2 span {
+  color: #ffe44c;
+}
+
+// a, a:hover, a:visited {
+//   color: #ffe44c;
+// }
+
 p {
   font-size: 40px;
+  color: #ffe44c;
 }
 
 tbody tr th, tbody tr td {
   width: 50%;
+}
+
+.badge {
+  font-size: 100%;
+  background-color: #ffe44c;
+}
+
+.card {
+  border-radius: 0;
+  background-color: black;
+  color: #ffe44c;
+  border: 1px solid #ffe44c;
+}
+
+.table {
+  color: #ffe44c;
+
+  td, tr, th {
+    color: #ffe44c;
+    border-top: 1px solid #ffe44c;
+    //border-bottom: 1px solid black;
+  }
+  th {
+    color: #ffe44c;
+  }
+}
+
+.btn {
+  background-color: #ffe44c;
 }
 
 /* ==============================================================================================
