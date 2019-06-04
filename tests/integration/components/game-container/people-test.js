@@ -34,19 +34,16 @@ module('Integration | Component | Game Container | People', function(hooks) {
   });
 
   test('it displays people correctly', async function(assert) {
-    this.set('collection', peopleModel);
+    this.set('model', peopleModel);
 
-    // keep model order so that collection is not shuffled in tests
     await render(hbs`
       <GameContainer
         @game="people"
         @selectedAttr="height"
-        @model={{collection}}
-        @keepModelOrder=true
+        @model={{model}}
       />
     `);
 
-    assert.expect(13);
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Mass : 80', 'Correct mass is shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Gender : male', 'Correct gender is shown');
@@ -73,8 +70,7 @@ module('Integration | Component | Game Container | People', function(hooks) {
       <GameContainer
         @game="people"
         @selectedAttr="height"
-        @model={{collection}}
-        @keepModelOrder=true
+        @model={{model}}
       />
     `);
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
