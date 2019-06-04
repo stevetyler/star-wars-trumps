@@ -1,29 +1,28 @@
 
 @import "ember-cli-bootstrap-4/bootstrap";
 
+$gold : #ffe75d; //#ffe44c;
+$silver: #d0cfcc;
+
 body {
   background-color: black;
 }
 
-h1, h2, h3 {
-  color: #ffe44c;
-
-  a, a:hover, a:visited, a:focus, a:active {
-    color: #ffe44c;
-  }
+h1 {
+  color: white;
 }
 
-h2, h2 span {
-  color: #ffe44c;
+h2, h2 span, h3, h3 {
+  color: $silver;
 }
 
-// a, a:hover, a:visited {
-//   color: #ffe44c;
-// }
+a, a:hover, a:visited {
+  color: $silver;
+}
 
 p {
   font-size: 40px;
-  color: #ffe44c;
+  color: $silver;
 }
 
 tbody tr th, tbody tr td {
@@ -32,31 +31,30 @@ tbody tr th, tbody tr td {
 
 .badge {
   font-size: 100%;
-  background-color: #ffe44c;
 }
 
 .card {
   border-radius: 0;
-  background-color: black;
-  color: #ffe44c;
-  border: 1px solid #ffe44c;
+  background-color: #d0cfcc;
+  color: black;
+  border: 1px solid black;
+
+  h3 {
+    color: black;
+  }
 }
 
 .table {
-  color: #ffe44c;
+  color: black;
 
   td, tr, th {
-    color: #ffe44c;
-    border-top: 1px solid #ffe44c;
-    //border-bottom: 1px solid black;
-  }
-  th {
-    color: #ffe44c;
+    color: black;
+    border-top: 1px solid black;
   }
 }
 
 .btn {
-  background-color: #ffe44c;
+  background-color: $silver;
 }
 
 /* ==============================================================================================
@@ -79,19 +77,18 @@ header {
 }
 h2 {
     margin-top: 30px;
-    text-align: center;
 }
-header h2 {
-    font-size: 22px;
-    margin: 0 auto;
-    padding: 10px 0;
-    width: 80%;
-    text-align: center;
-}
-header a, a:visited {
-    text-decoration:none;
-    color:#fcfcfc;
-}
+// header h2 {
+//     font-size: 22px;
+//     margin: 0 auto;
+//     padding: 10px 0;
+//     width: 80%;
+//     text-align: center;
+// }
+// header a, a:visited {
+//     text-decoration:none;
+//     color:#fcfcfc;
+// }
 
 @keyframes move-twink-back {
     from {background-position:0 0;}

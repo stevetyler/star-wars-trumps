@@ -55,28 +55,32 @@ export default Component.extend({
     this.set('dealtCards', dealtCards);
   },
 
+  _nextGame(collection) {
+    this.set('hideComputerCard', true);
+    this.set('result', '');
+
+    if (this.gameCount < collection.length) {
+      this.incrementProperty('gameCount');
+      if (this.gameCount === collection.length) {
+        this.refreshRoute();
+      } else {
+        this.set('gamePair', collection[this.gameCount]);
+        this.set('isLeftWinner', false);
+        this.set('isRightWinner', false);
+      }
+    }
+  },
+
   actions: {
     play(shuffledModel, attr) {
       const collection = this.get('dealtCards');
 
-      this.set('hideComputerCard', false);
-
       this._compareAttrs(collection[this.gameCount], attr);
 
-      setTimeout(() => {
-        this.set('hideComputerCard', true);
-        this.set('result', '');
+      this.set('hideComputerCard', false);
 
-        if (this.gameCount < collection.length) {
-          this.incrementProperty('gameCount');
-          if (this.gameCount === collection.length) {
-            this.refreshRoute();
-          } else {
-            this.set('gamePair', collection[this.gameCount]);
-            this.set('isLeftWinner', false);
-            this.set('isRightWinner', false);
-          }
-        }
+      setTimeout(() => {
+        this._nextGame(collection);
       }, 3000);
     }
   }
