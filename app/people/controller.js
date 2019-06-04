@@ -1,10 +1,11 @@
 import Controller from '@ember/controller';
-import {sort} from '@ember/object/computed';
+import {computed} from '@ember/object';
 
 export default Controller.extend({
   leftPlayerScore: 0,
   rightPlayerScore: 0,
-  shuffledModel: sort('model', function () {
+
+  shuffledModel: computed('model', function () {
     const array = this.model.toArray();
 
     for (let i = array.length - 1; i > 0; i--) {
@@ -12,5 +13,5 @@ export default Controller.extend({
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  }),
+  })
 });
