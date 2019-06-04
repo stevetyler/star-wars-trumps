@@ -2,62 +2,75 @@
   <div class="row justify-content-center">
     {{#each gamePair as |person i|}}
       <div class="col col-md-5 text-center">
-
-
         <div class="card mt-5">
           <div class="card-body">
-            {{#if (not (and i hideComputerCard))}}
-              <h3 class="card-title mb-2">{{person.name}}</h3>
-              <table class="table mt-4">
-                <tbody>
-                  <tr>
-                    <th scope="row" class="text-left">Gender</th><td class="text-right">{{person.gender}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Eye Colour</th><td class="text-right">{{person.eye_color}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Mass</th><td class="text-right">{{person.mass}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Height</th>
-                    <td class="font-weight-bold text-right">
+            <h3 class="card-title mb-2">
+              {{#if (not (and i hideComputerCard))}}
+                {{person.name}}
+              {{else}}
+                ?
+              {{/if}}
+            </h3>
+            <table class="table mt-4">
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-left">Gender</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{person.gender}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Eye Colour</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{person.eye_color}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Mass</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{person.mass}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Height</th>
+                  <td class="font-weight-bold text-right">
+                    {{#if (not (and i hideComputerCard))}}
                       {{#if (or (and i isRightWinner) (and isLeftWinner (not i)))}}
-                        <span class="badge badge-warning font-size-100">
+                        <span class="badge badge-dark font-size-100">
                           {{person.height}}
                         </span>
                       {{else}}
                         {{person.height}}
                       {{/if}}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Birth Year</th><td class="text-right">{{person.birth_year}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            {{else}}
-              <h3 class="card-title mb-2">?</h3>
-              <table class="table mt-4">
-                <tbody>
-                  <tr>
-                    <th scope="row" class="text-left">Gender</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Eye Colour</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Mass</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Height</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Birth Year</th><td class="text-right">?</td>
-                  </tr>
-                </tbody>
-              </table>
-            {{/if}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Birth Year</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{person.birth_year}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <h2>
@@ -73,61 +86,86 @@
   <div class="row justify-content-center">
     {{#each gamePair as |starship i|}}
       <div class="col col-md-5 text-center">
-
-
         <div class="card mt-5">
           <div class="card-body">
-            {{#if (not (and i hideComputerCard))}}
-              <h3 class="card-title mb-2 font-weight-bold">{{starship.name}}</h3>
+            <h3 class="card-title mb-2 font-weight-bold">
+              {{#if (not (and i hideComputerCard))}}
+                {{starship.name}}
+              {{else}}
+                ?
+              {{/if}}
+            </h3>
 
-              <table class="table mt-4">
-                <tbody>
-                  <tr>
-                    <th scope="row" class="text-left">Crew</th><td class="text-right">{{starship.crew}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Length</th><td class="font-weight-bold text-right"><span class="badge badge-dark">{{starship.length}}</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Hyperdrive Rating</th><td class="text-right">{{starship.hyperdrive_rating}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Passengers</th><td class="text-right">{{starship.passengers}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Cost in Credits</th><td class="text-right">{{starship.cost_in_credits}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Cargo Capacity</th><td class="text-right">{{starship.cargo_capacity}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            {{else}}
-              <h3 class="card-title mb-2 font-weight-bold">?</h3>
-
-              <table class="table mt-4">
-                <tbody>
-                  <tr>
-                    <th scope="row" class="text-left">Crew</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Length</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Passengers</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Hyperdrive Rating</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Cost in Credits</th><td class="text-right">?</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-left">Cargo Capacity</th><td class="text-right">?</td>
-                  </tr>
-                </tbody>
-              </table>
-            {{/if}}
+            <table class="table mt-4">
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-left">Crew</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{starship.crew}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Length</th>
+                  <td class="font-weight-bold text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{#if (or (and i isRightWinner) (and isLeftWinner (not i)))}}
+                        <span class="badge badge-dark">
+                          {{starship.length}}
+                        </span>
+                      {{else}}
+                        {{starship.length}}
+                      {{/if}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Hyperdrive Rating</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{starship.hyperdrive_rating}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Passengers</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{starship.passengers}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Cost in Credits</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{starship.cost_in_credits}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-left">Cargo Capacity</th>
+                  <td class="text-right">
+                    {{#if (not (and i hideComputerCard))}}
+                      {{starship.cargo_capacity}}
+                    {{else}}
+                      ?
+                    {{/if}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <h2>
