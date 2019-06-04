@@ -3,9 +3,8 @@ import {A} from '@ember/array';
 
 export default Component.extend({
   gameCount: 0,
-  result: '',
   gamePair: null,
-  keepModelOrder: false, // needed for tests
+  result: '',
   hideComputerCard: true,
   isLeftWinner: false,
   isRightWinner: false,
@@ -45,7 +44,7 @@ export default Component.extend({
       nativeArr.push(shuffledModel.get(i));
     }
 
-    const dealtCards = nativeArr.reduce(function(acc, model, i) {
+    const dealtCards = nativeArr.reduce((acc, model, i) => {
       if (i % 2 === 0) {
         acc.push(A([nativeArr[i], nativeArr[i+1]]));
       }
