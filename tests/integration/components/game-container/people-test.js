@@ -41,21 +41,24 @@ module('Integration | Component | Game Container | People', function(hooks) {
       />
     `);
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) tbody tr:nth-child(1) th').textContent.trim(), 'Gender', 'Correct gender is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) tbody tr:nth-child(1) td').textContent.trim(), 'male', 'Correct gender is shown');
+    const selector = '.row .col:nth-child(1) tbody tr:nth-child';
 
-    // assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(4)').textContent.trim(), 'Eye Colour : blue', 'Correct eye colour is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Mass : 80', 'Correct mass is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(3)').textContent.trim(), 'Height : 160', 'Correct height is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(5)').textContent.trim(), 'Birth Year : BBY60', 'Correct bith year is shown');
-    //
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'Luke Skywalker', 'Correct name is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(2)').textContent.trim(), 'Gender : male', 'Correct gender is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Eye Colour : blue', 'Correct eye colour is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(1)').textContent.trim(), 'Mass : 60', 'Correct mass is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(3)').textContent.trim(), 'Height : 170', 'Correct height is shown');
-    // assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Birth Year : BBY40', 'Correct birth year is shown');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
+
+    assert.equal(this.element.querySelector(`${selector}(1) th`).textContent.trim(), 'Gender', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${selector}(1) td`).textContent.trim(), 'male', 'Correct gender is shown');
+
+    assert.equal(this.element.querySelector(`${selector}(2) th`).textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${selector}(2) td`).textContent.trim(), 'blue', 'Correct eye colour is shown')
+
+    assert.equal(this.element.querySelector(`${selector}(3) th`).textContent.trim(), 'Mass', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${selector}(3) td`).textContent.trim(), '80', 'Correct mass is shown')
+
+    assert.equal(this.element.querySelector(`${selector}(4) th`).textContent.trim(), 'Height', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${selector}(4) td`).textContent.trim(), '160', 'Correct height is shown');
+
+    assert.equal(this.element.querySelector(`${selector}(5) th`).textContent.trim(), 'Birth Year', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${selector}(5) td`).textContent.trim(), 'BBY60', 'Correct birth year is shown');
 
     return a11yAudit(this.element).then(() => {
       assert.ok(true, 'No a11y errors found!');
@@ -63,25 +66,28 @@ module('Integration | Component | Game Container | People', function(hooks) {
   });
 
   test('it displays the correct winner', async function(assert) {
-    this.set('collection', peopleModel);
+    this.set('model', peopleModel);
+    this.set('leftPlayerScore', 0);
+    this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
         @game="people"
         @selectedAttr="height"
         @model={{model}}
+        @leftPlayerScore={{leftPlayerScore}}
+        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
+
+    await click('.btn');
+
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
 
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
 
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Computer Wins', 'Correct winner shown');
-
-    await click('.btn');
-
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Computer Wins', 'Correct winner still shows');
+    assert.equal(this.element.querySelector('p').textContent.trim(), 'Computer Wins!', 'Correct winner shown');
   });
 });

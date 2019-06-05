@@ -33,14 +33,13 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   const starshipsModel = A(starships);
 
   test('it displays starships correctly', async function(assert) {
-    this.set('collection', starshipsModel);
+    this.set('model', starshipsModel);
 
     await render(hbs`
       <GameContainer
         @game="starships"
         @selectedAttr="crew"
-        @model={{collection}}
-        @keepModelOrder=true
+        @model={{model}}
       />
     `);
 
@@ -70,14 +69,13 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   });
 
   test('it displays the correct winner', async function(assert) {
-    this.set('collection', starshipsModel);
+    this.set('model', starshipsModel);
 
     await render(hbs`
       <GameContainer
         @game="starships"
         @selectedAttr="crew"
         @model={{collection}}
-        @keepModelOrder=true
       />
     `);
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
