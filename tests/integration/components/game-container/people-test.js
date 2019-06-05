@@ -41,24 +41,24 @@ module('Integration | Component | Game Container | People', function(hooks) {
       />
     `);
 
-    const selector = '.row .col:nth-child(1) tbody tr:nth-child';
+    const columnLeft = '.row .col:nth-child(1) tbody tr:nth-child';
 
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
 
-    assert.equal(this.element.querySelector(`${selector}(1) th`).textContent.trim(), 'Gender', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${selector}(1) td`).textContent.trim(), 'male', 'Correct gender is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(1) th`).textContent.trim(), 'Gender', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(1) td`).textContent.trim(), 'male', 'Correct gender is shown');
 
-    assert.equal(this.element.querySelector(`${selector}(2) th`).textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${selector}(2) td`).textContent.trim(), 'blue', 'Correct eye colour is shown')
+    assert.equal(this.element.querySelector(`${columnLeft}(2) th`).textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(2) td`).textContent.trim(), 'blue', 'Correct eye colour is shown')
 
-    assert.equal(this.element.querySelector(`${selector}(3) th`).textContent.trim(), 'Mass', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${selector}(3) td`).textContent.trim(), '80', 'Correct mass is shown')
+    assert.equal(this.element.querySelector(`${columnLeft}(3) th`).textContent.trim(), 'Mass', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(3) td`).textContent.trim(), '80', 'Correct mass is shown')
 
-    assert.equal(this.element.querySelector(`${selector}(4) th`).textContent.trim(), 'Height', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${selector}(4) td`).textContent.trim(), '160', 'Correct height is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(4) th`).textContent.trim(), 'Height', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(4) td`).textContent.trim(), '160', 'Correct height is shown');
 
-    assert.equal(this.element.querySelector(`${selector}(5) th`).textContent.trim(), 'Birth Year', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${selector}(5) td`).textContent.trim(), 'BBY60', 'Correct birth year is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(5) th`).textContent.trim(), 'Birth Year', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(5) td`).textContent.trim(), 'BBY60', 'Correct birth year is shown');
 
     return a11yAudit(this.element).then(() => {
       assert.ok(true, 'No a11y errors found!');
@@ -66,6 +66,8 @@ module('Integration | Component | Game Container | People', function(hooks) {
   });
 
   test('it displays the correct winner', async function(assert) {
+    const columnRight = '.row .col:nth-child(2) tbody tr:nth-child';
+    
     this.set('model', peopleModel);
     this.set('leftPlayerScore', 0);
     this.set('rightPlayerScore', 0);
@@ -81,6 +83,23 @@ module('Integration | Component | Game Container | People', function(hooks) {
     `);
 
     await click('.btn');
+
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'Luke Skywalker', 'Correct name is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(1) th`).textContent.trim(), 'Gender', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(1) td`).textContent.trim(), 'male', 'Correct gender is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(2) th`).textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(2) td`).textContent.trim(), 'blue', 'Correct eye colour is shown')
+
+    assert.equal(this.element.querySelector(`${columnRight}(3) th`).textContent.trim(), 'Mass', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(3) td`).textContent.trim(), '60', 'Correct mass is shown')
+
+    assert.equal(this.element.querySelector(`${columnRight}(4) th`).textContent.trim(), 'Height', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(4) td`).textContent.trim(), '170', 'Correct height is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(5) th`).textContent.trim(), 'Birth Year', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(5) td`).textContent.trim(), 'BBY40', 'Correct birth year is shown');
 
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
