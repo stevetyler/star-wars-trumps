@@ -13,10 +13,6 @@ export default Component.extend({
     this._super(...arguments);
 
     this._deal(this.model);
-
-    const collection = this.get('dealtCards');
-
-    this.set('gamePair', collection[0]);
   },
 
   _compareAttrs(collection, attr) {
@@ -52,6 +48,7 @@ export default Component.extend({
     }, []);
 
     this.set('dealtCards', dealtCards);
+    this.set('gamePair', dealtCards[0]);
   },
 
   _nextGame(collection) {

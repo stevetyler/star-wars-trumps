@@ -5,7 +5,6 @@ import hbs from 'htmlbars-inline-precompile';
 import EmberObject from '@ember/object';
 import a11yAudit from 'ember-a11y-testing/test-support/audit';
 import { A } from '@ember/array';
-import ArrayProxy from '@ember/array/proxy';
 
 module('Integration | Component | Game Container | Starships', function(hooks) {
   setupRenderingTest(hooks);
@@ -31,9 +30,7 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
     })
   ];
 
-  const starshipsModel = ArrayProxy.create({
-    content: A(starships)
-  });
+  const starshipsModel = A(starships);
 
   test('it displays starships correctly', async function(assert) {
     this.set('collection', starshipsModel);
