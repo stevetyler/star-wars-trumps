@@ -32,14 +32,20 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
 
   const starshipsModel = A(starships);
 
-  test('it displays starships correctly', async function(assert) {
+  test('it displays card correctly for player', async function(assert) {
+    const columnLeft = '.row .col:nth-child(1) tbody tr:nth-child';
+
     this.set('model', starshipsModel);
+    this.set('leftPlayerScore', 0);
+    this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
         @game="starships"
         @selectedAttr="crew"
         @model={{model}}
+        @leftPlayerScore={{leftPlayerScore}}
+        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
 
@@ -48,46 +54,77 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
       this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(),
       'Millenium Falcon',
       'Correct name is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(1)').textContent.trim(), 'Crew : 5', 'Correct crew is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(2)').textContent.trim(), 'Length : 300', 'Correct length is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(3)').textContent.trim(), 'Passengers : 2', 'Correct passengers are shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(4)').textContent.trim(), 'Hyperdrive Rating : 3', 'Correct rating is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(5)').textContent.trim(), 'Cost in Credits : 10000', 'Correct cost is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 2000', 'Correct capacity is shown');
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(1)').textContent.trim(), 'Crew : 1', 'Correct crew is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(2)').textContent.trim(), 'Length : 100', 'Correct length is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(3)').textContent.trim(), 'Passengers : 1', 'Correct passengers are shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(4)').textContent.trim(), 'Hyperdrive Rating : 1', 'Correct rating is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(5)').textContent.trim(), 'Cost in Credits : 2000', 'Correct cost is shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) li:nth-child(6)').textContent.trim(), 'Cargo Capacity : 10', 'Correct capacity is shown');
+    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Millenium Falcon', 'Correct name is shown');
+
+    assert.equal(this.element.querySelector(`${columnLeft}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(1) td`).textContent.trim(), '5', 'Correct crew is shown');
+
+    assert.equal(this.element.querySelector(`${columnLeft}(2) th`).textContent.trim(), 'Length', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(2) td`).textContent.trim(), '300', 'Correct length is shown')
+
+    assert.equal(this.element.querySelector(`${columnLeft}(3) th`).textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(3) td`).textContent.trim(), '3', 'Correct hyperdrive rating is shown');
+
+    assert.equal(this.element.querySelector(`${columnLeft}(4) th`).textContent.trim(), 'Passengers', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(4) td`).textContent.trim(), '2', 'Correct passengers is shown')
+
+    assert.equal(this.element.querySelector(`${columnLeft}(5) th`).textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(5) td`).textContent.trim(), '10000', 'Correct cost is shown');
+
+    assert.equal(this.element.querySelector(`${columnLeft}(6) th`).textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnLeft}(6) td`).textContent.trim(), '2000', 'Correct capacity is shown');
 
     return a11yAudit(this.element).then(() => {
       assert.ok(true, 'No a11y errors found!');
     });
   });
 
-  test('it displays the correct winner', async function(assert) {
+  test('it displays the computer card and correct winner', async function(assert) {
+    const columnRight = '.row .col:nth-child(2) tbody tr:nth-child';
+
     this.set('model', starshipsModel);
+    this.set('leftPlayerScore', 0);
+    this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
         @game="starships"
         @selectedAttr="crew"
-        @model={{collection}}
+        @model={{model}}
+        @leftPlayerScore={{leftPlayerScore}}
+        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
+
+    await click('.btn');
+
+    assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(1) td`).textContent.trim(), '1', 'Correct crew is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(2) th`).textContent.trim(), 'Length', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(2) td`).textContent.trim(), '100', 'Correct length is shown')
+
+    assert.equal(this.element.querySelector(`${columnRight}(3) th`).textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(3) td`).textContent.trim(), '1', 'Correct hyperdrive rating is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(4) th`).textContent.trim(), 'Passengers', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(4) td`).textContent.trim(), '1', 'Correct passengers is shown')
+
+    assert.equal(this.element.querySelector(`${columnRight}(5) th`).textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(5) td`).textContent.trim(), '2000', 'Correct cost is shown');
+
+    assert.equal(this.element.querySelector(`${columnRight}(6) th`).textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector(`${columnRight}(6) td`).textContent.trim(), '10', 'Correct capacity is shown');
+
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
 
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
 
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins', 'Correct winner shown');
-
-    await click('.btn');
-
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins', 'Correct winner still shows');
+    assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins!', 'Correct winner shown');
   });
 });
