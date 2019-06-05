@@ -15,16 +15,26 @@ export default Component.extend({
     this._deal(this.model);
   },
 
-  _compareAttrs(collection, attr) {
-    const leftScore = parseFloat(collection[0].get(attr));
-    const rightScore = parseFloat(collection[1].get(attr));
+  _formatAttr(str) {
+    if (str === 'unknown') {
+      return 0;
+    }
+    if (str.indexOf(',')) {
+      return Number(str.replace(/,/g, ''));
+    }
+    return Number(str);
+  },
 
-    if (leftScore > rightScore) {
+  _compareAttrs(collection, attr) {
+    const leftAttr = this._formatAttr(collection[0].get(attr));
+    const rightAttr = this._formatAttr(collection[1].get(attr));
+
+    if (leftAttr > rightAttr) {
       this.incrementProperty('leftPlayerScore');
       this.set('isLeftWinner', true);
       this.set('result', 'Player Wins!');
     }
-    else if (leftScore < rightScore){
+    else if (leftAttr < rightAttr){
       this.incrementProperty('rightPlayerScore');
       this.set('isRightWinner', true);
       this.set('result', 'Computer Wins!');
