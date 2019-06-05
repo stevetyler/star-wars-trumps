@@ -40,15 +40,15 @@ export default Component.extend({
       nativeArr.push(shuffledModel.get(i));
     }
 
-    const dealtCards = nativeArr.reduce((acc, model, i) => {
+    const collection = nativeArr.reduce((acc, model, i) => {
       if (i % 2 === 0) {
         acc.push(A([nativeArr[i], nativeArr[i+1]]));
       }
       return acc;
     }, []);
 
-    this.set('dealtCards', dealtCards);
-    this.set('gamePair', dealtCards[0]);
+    this.set('collection', collection);
+    this.set('gamePair', collection[0]);
   },
 
   _nextGame(collection) {
@@ -69,7 +69,7 @@ export default Component.extend({
 
   actions: {
     play(shuffledModel, attr) {
-      const collection = this.get('dealtCards');
+      const collection = this.get('collection');
 
       this._compareAttrs(collection[this.gameCount], attr);
 
