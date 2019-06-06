@@ -15,7 +15,7 @@ export default Component.extend({
     this._deal(this.model);
   },
 
-  _formatAttr(str) {
+  _parseAttr(str) {
     if (str === 'unknown') {
       return 0;
     }
@@ -26,8 +26,8 @@ export default Component.extend({
   },
 
   _compareAttrs(collection, attr) {
-    const leftAttr = this._formatAttr(collection[0].get(attr));
-    const rightAttr = this._formatAttr(collection[1].get(attr));
+    const leftAttr = this._parseAttr(collection[0].get(attr));
+    const rightAttr = this._parseAttr(collection[1].get(attr));
 
     if (leftAttr > rightAttr) {
       this.incrementProperty('leftPlayerScore');
