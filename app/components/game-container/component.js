@@ -32,7 +32,7 @@ export default Component.extend({
     if (leftAttr > rightAttr) {
       this.incrementProperty('leftPlayerScore');
       this.set('isLeftWinner', true);
-      this.set('result', 'Player Wins!');
+      this.set('result', 'You Win!');
     }
     else if (leftAttr < rightAttr){
       this.incrementProperty('rightPlayerScore');

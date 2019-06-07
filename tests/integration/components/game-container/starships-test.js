@@ -125,6 +125,6 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
     assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
 
-    assert.equal(this.element.querySelector('p').textContent.trim(), 'Player Wins!', 'Correct winner shown');
+    assert.equal(this.element.querySelector('p').textContent.trim(), 'You Win!', 'Correct winner shown');
   });
 });
