@@ -33,7 +33,7 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   const starshipsModel = A(starships);
 
   test('it displays card correctly for player', async function(assert) {
-    const columnLeft = '.row .col:nth-child(1) tbody tr:nth-child';
+    const columnLeft = '.row .col-sm-10:nth-child(1) tbody tr:nth-child';
 
     this.set('model', starshipsModel);
     this.set('leftPlayerScore', 0);
@@ -51,11 +51,11 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
 
     assert.expect(15);
     assert.equal(
-      this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(),
+      this.element.querySelector('.row .col-sm-10:nth-child(1) h3').textContent.trim(),
       'Millenium Falcon',
       'Correct name is shown');
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) h3').textContent.trim(), 'Millenium Falcon', 'Correct name is shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h3').textContent.trim(), 'Millenium Falcon', 'Correct name is shown');
 
     assert.equal(this.element.querySelector(`${columnLeft}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
     assert.equal(this.element.querySelector(`${columnLeft}(1) td`).textContent.trim(), '5', 'Correct crew is shown');
@@ -81,7 +81,7 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   });
 
   test('it displays the computer card and correct winner', async function(assert) {
-    const columnRight = '.row .col:nth-child(2) tbody tr:nth-child';
+    const columnRight = '.row .col-sm-10:nth-child(2) tbody tr:nth-child';
 
     this.set('model', starshipsModel);
     this.set('leftPlayerScore', 0);
@@ -99,7 +99,7 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
 
     await click('.btn');
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) h3').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(2) h3').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
 
     assert.equal(this.element.querySelector(`${columnRight}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
     assert.equal(this.element.querySelector(`${columnRight}(1) td`).textContent.trim(), '1', 'Correct crew is shown');
@@ -119,11 +119,11 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
     assert.equal(this.element.querySelector(`${columnRight}(6) th`).textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
     assert.equal(this.element.querySelector(`${columnRight}(6) td`).textContent.trim(), '10', 'Correct capacity is shown');
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
 
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
-    assert.equal(this.element.querySelector('.row .col:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(2) h2 span:nth-child(1)').textContent.trim(), 'Computer :', 'Computer heading shown');
+    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(2) h2 span:nth-child(2)').textContent.trim(), '0', 'Correct score shown');
 
     assert.equal(this.element.querySelector('p').textContent.trim(), 'You Win!', 'Correct winner shown');
   });
