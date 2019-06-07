@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import getRandomInt from 'star-wars-trumps/utils/random-integer';
+import {getRandomInt} from 'star-wars-trumps/utils/helpers';
 
 export default Route.extend({
   model() {

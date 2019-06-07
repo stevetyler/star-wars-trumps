@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import getRandomInt from 'star-wars-trumps/utils/random-integer';
+import {getRandomInt} from 'star-wars-trumps/utils/helpers';
 
 module('Unit | Utils | Random Integer', function(hooks) {
   setupTest(hooks);
