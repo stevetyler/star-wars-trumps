@@ -1,28 +1,35 @@
 
 @import "ember-cli-bootstrap-4/bootstrap";
 
-$gold : #ffe75d; //#ffe44c;
-$silver: #d0cfcc;
-
 body {
   background-color: black;
 }
 
-h1 {
+h1, h3 {
   color: white;
+
+  a, a:hover, a:visited, a:focus {
+    color: gold;
+  }
+}
+
+.btn, .btn:hover, .btn:active, .btn:focus {
+  color: black;
+  background-color: gold;
+  border-radius: 0;
 }
 
 h2, h2 span, h3, h3 {
-  color: $silver;
+  color: white;
 }
 
-a, a:hover, a:visited {
-  color: $silver;
+a, a:hover, a:active, a:focus {
+  color: white;
 }
 
 p {
   font-size: 40px;
-  color: $silver;
+  color: gold;
 }
 
 tbody tr th, tbody tr td {
@@ -31,11 +38,13 @@ tbody tr th, tbody tr td {
 
 .badge {
   font-size: 100%;
+  background-color: gold;
+  color: black;
 }
 
 .card {
   border-radius: 0;
-  background-color: #d0cfcc;
+  background-color: white;
   color: black;
   border: 1px solid black;
 
@@ -54,7 +63,7 @@ tbody tr th, tbody tr td {
 }
 
 .btn {
-  background-color: $silver;
+  background-color: white;
 }
 
 /* ==============================================================================================
@@ -78,17 +87,6 @@ header {
 h2 {
     margin-top: 30px;
 }
-// header h2 {
-//     font-size: 22px;
-//     margin: 0 auto;
-//     padding: 10px 0;
-//     width: 80%;
-//     text-align: center;
-// }
-// header a, a:visited {
-//     text-decoration:none;
-//     color:#fcfcfc;
-// }
 
 @keyframes move-twink-back {
     from {background-position:0 0;}
