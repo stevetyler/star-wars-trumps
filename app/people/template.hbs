@@ -1,4 +1,7 @@
 <GameContainer
+  @leftPlayerScore={{leftPlayerScore}}
+  @rightPlayerScore={{rightPlayerScore}}
   @game="people"
-  @model={{model}}
-  @selectedAttr="height"/>
+  @model={{shuffledModel}}
+  @selectedAttr="height"
+  @refreshRoute={{route-action "refreshRoute"}}/>

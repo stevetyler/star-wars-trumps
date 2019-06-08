@@ -1,59 +1,93 @@
 import Component from '@ember/component';
+import {A} from '@ember/array';
 
 export default Component.extend({
-  leftPlayerScore: 0,
-  rightPlayerScore: 0,
+  gameCount: 0,
+  gamePair: null,
   result: '',
-  gameCollection: null,
-  keepModelOrder: false, // needed for tests
+  hideComputerCard: true,
+  isLeftWinner: false,
+  isRightWinner: false,
 
   init() {
     this._super(...arguments);
 
-    this.send('play', this.model, this.selectedAttr);
+    this._deal(this.model);
+  },
+
+  _parseAttr(str) {
+    if (str === 'unknown') {
+      return 0;
+    }
+    if (str.indexOf(',')) {
+      return Number(str.replace(/,/g, ''));
+    }
+    return Number(str);
   },
 
   _compareAttrs(collection, attr) {
-    const leftScore = parseFloat(collection[0].get(attr));
-    const rightScore = parseFloat(collection[1].get(attr));
+    const leftAttr = this._parseAttr(collection[0].get(attr));
+    const rightAttr = this._parseAttr(collection[1].get(attr));
 
-    if (leftScore > rightScore) {
+    if (leftAttr > rightAttr) {
       this.incrementProperty('leftPlayerScore');
-      this.set('result', 'Player Wins');
+      this.set('isLeftWinner', true);
+      this.set('result', 'You Win!');
     }
-    else if (leftScore < rightScore){
+    else if (leftAttr < rightAttr){
       this.incrementProperty('rightPlayerScore');
-      this.set('result', 'Computer Wins');
+      this.set('isRightWinner', true);
+      this.set('result', 'Computer Wins!');
     } else {
       this.set('result', 'Draw');
     }
   },
 
-  _shuffleModel(model) {
-    const array = model.toArray();
+  _deal(shuffledModel) {
+    const nativeArr = [];
 
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    for (let i = 0; i < shuffledModel.length; i++) {
+      nativeArr.push(shuffledModel.get(i));
     }
 
-    return array;
+    const collection = nativeArr.reduce((acc, model, i) => {
+      if (i % 2 === 0) {
+        acc.push(A([nativeArr[i], nativeArr[i+1]]));
+      }
+      return acc;
+    }, []);
+
+    this.set('collection', collection);
+    this.set('gamePair', collection[0]);
+  },
+
+  _nextGame(collection) {
+    this.set('hideComputerCard', true);
+    this.set('result', '');
+
+    if (this.gameCount < collection.length) {
+      this.incrementProperty('gameCount');
+      if (this.gameCount === collection.length) {
+        this.refreshRoute();
+      } else {
+        this.set('gamePair', collection[this.gameCount]);
+        this.set('isLeftWinner', false);
+        this.set('isRightWinner', false);
+      }
+    }
   },
 
   actions: {
-    play(model, attr) {
-      let collection;
+    play(shuffledModel, attr) {
+      const collection = this.get('collection');
 
-      if (this.keepModelOrder) {
-        collection = model.toArray();
-      }
-      else {
-        const shuffledModel = this._shuffleModel(model);
-        collection = [shuffledModel.get('firstObject'), shuffledModel.get('lastObject')];
-      }
-      this.set('gameCollection', collection);
+      this._compareAttrs(collection[this.gameCount], attr);
 
-      this._compareAttrs(collection, attr);
-    },
+      this.set('hideComputerCard', false);
+
+      setTimeout(() => {
+        this._nextGame(collection);
+      }, 3000);
+    }
   }
 });

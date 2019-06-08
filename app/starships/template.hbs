@@ -1,4 +1,7 @@
 <GameContainer
+  @leftPlayerScore={{leftPlayerScore}}
+  @rightPlayerScore={{rightPlayerScore}}
   @game="starships"
-  @model={{model}}
-  @selectedAttr="crew"/>
+  @model={{shuffledModel}}
+  @selectedAttr="length"
+  @refreshRoute={{route-action "refreshRoute"}}/>
