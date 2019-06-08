@@ -36,6 +36,11 @@ tbody tr th, tbody tr td {
   width: 50%;
 }
 
+.table th, .table td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .badge {
   font-size: 100%;
   background-color: gold;
