@@ -25,16 +25,16 @@ export default Component.extend({
     return Number(str);
   },
 
-  _compareAttrs(collection, attr) {
-    const leftAttr = this._parseAttr(collection[0].get(attr));
-    const rightAttr = this._parseAttr(collection[1].get(attr));
+  _compareAttrs(collection, Property) {
+    const leftProperty = this._parseAttr(collection[0].get(`properties.${Property}`));
+    const rightProperty = this._parseAttr(collection[1].get(`properties.${Property}`));
 
-    if (leftAttr > rightAttr) {
+    if (leftProperty > rightProperty) {
       this.incrementProperty('leftPlayerScore');
       this.set('isLeftWinner', true);
       this.set('result', 'You Win!');
     }
-    else if (leftAttr < rightAttr){
+    else if (leftProperty < rightProperty){
       this.incrementProperty('rightPlayerScore');
       this.set('isRightWinner', true);
       this.set('result', 'Computer Wins!');
@@ -78,10 +78,10 @@ export default Component.extend({
   },
 
   actions: {
-    play(shuffledModel, attr) {
+    play(shuffledModel, property) {
       const collection = this.get('collection');
 
-      this._compareAttrs(collection[this.gameCount], attr);
+      this._compareAttrs(collection[this.gameCount], property);
 
       this.set('hideComputerCard', false);
 
