@@ -18,9 +18,13 @@
                   <td class={{if (eq key selectedProperty) 'font-weight-bold bg-dark text-white text-right' 'text-right'}}>
                     {{#if (not (and i hideComputerCard))}}
                       {{#if (or (and isLeftWinner (not i)) (and i isRightWinner))}}
-                        <span class="badge badge-dark font-size-100">
+                        {{#if (eq key selectedProperty)}}
+                          <span class="badge badge-dark font-size-100">
+                            {{value}}
+                          </span>
+                        {{else}}
                           {{value}}
-                        </span>
+                        {{/if}}
                       {{else}}
                         {{value}}
                       {{/if}}
@@ -30,24 +34,6 @@
                   </td>
                 </tr>
               {{/each-in}}
-              {{!--
-              <tr>
-                <th scope="row" class="text-left bg-dark text-white">Height</th>
-                <td class="font-weight-bold bg-dark text-white text-right">
-                  {{#if (not (and i hideComputerCard))}}
-                    {{#if (or (and i isRightWinner) (and isLeftWinner (not i)))}}
-                      <span class="badge badge-dark font-size-100">
-                        {{person.height}}
-                      </span>
-                    {{else}}
-                      {{person.height}}
-                    {{/if}}
-                  {{else}}
-                    ?
-                  {{/if}}
-                </td>
-              </tr>
-              --}}
             </tbody>
           </table>
         </div>
