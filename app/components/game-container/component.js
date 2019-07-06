@@ -1,7 +1,17 @@
 import Component from '@ember/component';
 import {A} from '@ember/array';
+import {shuffle} from 'star-wars-trumps/utils/helpers';
+import {computed} from '@ember/object';
 
 export default Component.extend({
+  init() {
+    const shuffledModel = this.get('shuffledModel');
+    this._super(...arguments);
+    this._deal(shuffledModel);
+  },
+  
+  leftPlayerScore: 0,
+  rightPlayerScore: 0,
   gameCount: 0,
   gamePair: null,
   result: '',
@@ -9,11 +19,11 @@ export default Component.extend({
   isLeftWinner: false,
   isRightWinner: false,
 
-  init() {
-    this._super(...arguments);
+  shuffledModel: computed('model', function () {
+    const array = this.model.toArray();
 
-    this._deal(this.model);
-  },
+    return shuffle(array);
+  }),
 
   _parseAttr(str) {
     if (str === 'unknown') {
