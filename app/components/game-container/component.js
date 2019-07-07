@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import {A} from '@ember/array';
 import {shuffle} from 'star-wars-trumps/utils/helpers';
 import {computed} from '@ember/object';
+import config from 'star-wars-trumps/config/environment';
 
 export default Component.extend({
   init() {
@@ -9,7 +10,7 @@ export default Component.extend({
     this._super(...arguments);
     this._deal(shuffledModel);
   },
-  
+
   leftPlayerScore: 0,
   rightPlayerScore: 0,
   gameCount: 0,
@@ -22,7 +23,8 @@ export default Component.extend({
   shuffledModel: computed('model', function () {
     const array = this.model.toArray();
 
-    return shuffle(array);
+    console.log('environment', config.environment);
+    return config.environment !== 'test' ? shuffle(array) : array;
   }),
 
   _parseAttr(str) {
