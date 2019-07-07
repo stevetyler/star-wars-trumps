@@ -12,19 +12,25 @@ module('Integration | Component | Game Container | People', function(hooks) {
   const people = [
     EmberObject.create({
       name: 'Obi Wan',
-      height: '160',
-      mass: '80',
-      eye_color: 'blue',
-      birth_year: 'BBY60',
-      gender: 'male'
+      properties: {
+        Name: 'Obi Wan',
+        Height: '160',
+        Mass: '80',
+        'Eye Colour': 'blue',
+        'Birth Year': 'BBY60',
+        Gender: 'male'
+      }
     }),
     EmberObject.create({
       name: 'Luke Skywalker',
-      height: '170',
-      mass: '60',
-      eye_color: 'blue',
-      birth_year: 'BBY40',
-      gender: 'male'
+      properties: {
+        Name: 'Luke Skywalker',
+        Height: '170',
+        Mass: '60',
+        'Eye Colour': 'blue',
+        'Birth Year': 'BBY40',
+        Gender: 'male'
+      }
     })
   ];
 
@@ -35,30 +41,27 @@ module('Integration | Component | Game Container | People', function(hooks) {
 
     await render(hbs`
       <GameContainer
-        @game="people"
-        @selectedAttr="height"
+        @selectedProperty="Height"
         @model={{model}}
       />
     `);
 
-    const columnLeft = '.row .col-sm-8:nth-child(1) tbody tr:nth-child';
+    assert.equal(this.element.querySelector('[data-test-card-name="0"]').textContent.trim(), 'Obi Wan', 'Correct name is shown');
 
-    assert.equal(this.element.querySelector('.row .col-sm-8:nth-child(1) h3').textContent.trim(), 'Obi Wan', 'Correct name is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Gender-0"]').textContent.trim(), 'Gender', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Gender-0"]').textContent.trim(), 'male', 'Correct gender is shown');
 
-    assert.equal(this.element.querySelector(`${columnLeft}(1) th`).textContent.trim(), 'Gender', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(1) td`).textContent.trim(), 'male', 'Correct gender is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Eye Colour-0"]').textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Eye Colour-0"]').textContent.trim(), 'blue', 'Correct eye colour is shown')
 
-    assert.equal(this.element.querySelector(`${columnLeft}(2) th`).textContent.trim(), 'Eye Colour', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(2) td`).textContent.trim(), 'blue', 'Correct eye colour is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Mass-0"]').textContent.trim(), 'Mass', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Mass-0"]').textContent.trim(), '80', 'Correct mass is shown')
 
-    assert.equal(this.element.querySelector(`${columnLeft}(3) th`).textContent.trim(), 'Mass', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(3) td`).textContent.trim(), '80', 'Correct mass is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Height-0"]').textContent.trim(), 'Height', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Height-0"]').textContent.trim(), '160', 'Correct height is shown');
 
-    assert.equal(this.element.querySelector(`${columnLeft}(4) th`).textContent.trim(), 'Height', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(4) td`).textContent.trim(), '160', 'Correct height is shown');
-
-    assert.equal(this.element.querySelector(`${columnLeft}(5) th`).textContent.trim(), 'Birth Year', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(5) td`).textContent.trim(), 'BBY60', 'Correct birth year is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Birth Year-0"]').textContent.trim(), 'Birth Year', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Birth Year-0"]').textContent.trim(), 'BBY60', 'Correct birth year is shown');
 
     return a11yAudit(this.element).then(() => {
       assert.ok(true, 'No a11y errors found!');
@@ -66,19 +69,14 @@ module('Integration | Component | Game Container | People', function(hooks) {
   });
 
   test('it displays the computer card and correct winner', async function(assert) {
-    const columnRight = '.row .col-sm-8:nth-child(2) tbody tr:nth-child';
-
     this.set('model', peopleModel);
     this.set('leftPlayerScore', 0);
     this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
-        @game="people"
-        @selectedAttr="height"
+        @selectedProperty="Height"
         @model={{model}}
-        @leftPlayerScore={{leftPlayerScore}}
-        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
 
