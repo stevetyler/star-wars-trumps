@@ -3,7 +3,7 @@
     <div class="col-sm-8 col-md-6 col-lg-4 text-center">
       <div class="card mt-5">
         <div class="card-body">
-          <h3 data-test-card-name="{{i}}" class="card-title mb-2">
+          <h3 data-test-card-name={{i}} class="card-title mb-2">
             {{#if (not (and i hideComputerCard))}}
               {{model.name}}
             {{else}}
@@ -15,18 +15,18 @@
               {{#each-in model.properties as |key value|}}
                 <tr>
                   <th
-                    data-test-property-name="{{key}}-{{i}}"
+                    data-test-property-name="{{key}} Player {{i}}"
                     class={{if (eq key selectedProperty)
-                    'text-left bg-dark text-white'
-                    'text-left'}}
+                    "text-left bg-dark text-white"
+                    "text-left"}}
                     scope="row">
                     {{key}}
                   </th>
                   <td
-                    data-test-property-value="{{key}}-{{i}}"
+                    data-test-property-value="{{key}} Player {{i}}"
                     class={{if (eq key selectedProperty)
-                    'font-weight-bold bg-dark text-white text-right'
-                    'text-right'}}>
+                    "font-weight-bold bg-dark text-white text-right"
+                    "text-right"}}>
                     {{#if (not (and i hideComputerCard))}}
                       {{#if (and
                         (eq key selectedProperty)
