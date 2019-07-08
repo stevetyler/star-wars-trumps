@@ -73,17 +73,19 @@ export default Component.extend({
   },
 
   _nextGame(collection) {
-    this.set('hideComputerCard', true);
-    this.set('result', '');
+    if (!this.isDestroyed) {
+      this.set('hideComputerCard', true);
+      this.set('result', '');
 
-    if (this.gameCount < collection.length) {
-      this.incrementProperty('gameCount');
-      if (this.gameCount === collection.length) {
-        this.refreshRoute();
-      } else {
-        this.set('gamePair', collection[this.gameCount]);
-        this.set('isLeftWinner', false);
-        this.set('isRightWinner', false);
+      if (this.gameCount < collection.length) {
+        this.incrementProperty('gameCount');
+        if (this.gameCount === collection.length) {
+          this.refreshRoute();
+        } else {
+          this.set('gamePair', collection[this.gameCount]);
+          this.set('isLeftWinner', false);
+          this.set('isRightWinner', false);
+        }
       }
     }
   },
