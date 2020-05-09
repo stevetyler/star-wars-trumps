@@ -10,5 +10,5 @@ export default DS.JSONAPIAdapter.extend({
     });
   },
   namespace: 'api',
-  host: 'https://swapi.co'
+  host: 'https://swapi.dev'
 });
