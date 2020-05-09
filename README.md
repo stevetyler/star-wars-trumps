@@ -2,7 +2,7 @@
 
 Star Wars Top Trumps
 
-Using SWAPI: https://swapi.co/documentation
+Using SWAPI: https://swapi.dev/documentation
 
 
 ## Prerequisites
