@@ -1,7 +1,18 @@
 import Component from '@ember/component';
 import {A} from '@ember/array';
+import {shuffle} from 'star-wars-trumps/utils/helpers';
+import {computed} from '@ember/object';
+import config from 'star-wars-trumps/config/environment';
 
 export default Component.extend({
+  init() {
+    const shuffledModel = this.get('shuffledModel');
+    this._super(...arguments);
+    this._deal(shuffledModel);
+  },
+
+  leftPlayerScore: 0,
+  rightPlayerScore: 0,
   gameCount: 0,
   gamePair: null,
   result: '',
@@ -9,11 +20,11 @@ export default Component.extend({
   isLeftWinner: false,
   isRightWinner: false,
 
-  init() {
-    this._super(...arguments);
+  shuffledModel: computed('model', function () {
+    const array = this.model.toArray();
 
-    this._deal(this.model);
-  },
+    return config.environment !== 'test' ? shuffle(array) : array;
+  }),
 
   _parseAttr(str) {
     if (str === 'unknown') {
@@ -62,17 +73,19 @@ export default Component.extend({
   },
 
   _nextGame(collection) {
-    this.set('hideComputerCard', true);
-    this.set('result', '');
+    if (!this.isDestroyed) {
+      this.set('hideComputerCard', true);
+      this.set('result', '');
 
-    if (this.gameCount < collection.length) {
-      this.incrementProperty('gameCount');
-      if (this.gameCount === collection.length) {
-        this.refreshRoute();
-      } else {
-        this.set('gamePair', collection[this.gameCount]);
-        this.set('isLeftWinner', false);
-        this.set('isRightWinner', false);
+      if (this.gameCount < collection.length) {
+        this.incrementProperty('gameCount');
+        if (this.gameCount === collection.length) {
+          this.refreshRoute();
+        } else {
+          this.set('gamePair', collection[this.gameCount]);
+          this.set('isLeftWinner', false);
+          this.set('isRightWinner', false);
+        }
       }
     }
   },

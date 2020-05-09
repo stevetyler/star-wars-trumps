@@ -3,7 +3,7 @@
     <div class="col-sm-8 col-md-6 col-lg-4 text-center">
       <div class="card mt-5">
         <div class="card-body">
-          <h3 class="card-title mb-2">
+          <h3 data-test-card-name={{i}} class="card-title mb-2">
             {{#if (not (and i hideComputerCard))}}
               {{model.name}}
             {{else}}
@@ -14,17 +14,27 @@
             <tbody>
               {{#each-in model.properties as |key value|}}
                 <tr>
-                  <th scope="row" class={{if (eq key selectedProperty) 'text-left bg-dark text-white' 'text-left'}}>{{key}}</th>
-                  <td class={{if (eq key selectedProperty) 'font-weight-bold bg-dark text-white text-right' 'text-right'}}>
+                  <th
+                    data-test-property-name="{{key}} Player {{i}}"
+                    class={{if (eq key selectedProperty)
+                    "text-left bg-dark text-white"
+                    "text-left"}}
+                    scope="row">
+                    {{key}}
+                  </th>
+                  <td
+                    data-test-property-value="{{key}} Player {{i}}"
+                    class={{if (eq key selectedProperty)
+                    "font-weight-bold bg-dark text-white text-right"
+                    "text-right"}}>
                     {{#if (not (and i hideComputerCard))}}
-                      {{#if (or (and isLeftWinner (not i)) (and i isRightWinner))}}
-                        {{#if (eq key selectedProperty)}}
-                          <span class="badge badge-dark font-size-100">
-                            {{value}}
-                          </span>
-                        {{else}}
+                      {{#if (and
+                        (eq key selectedProperty)
+                        (or (and isLeftWinner (not i)) (and i isRightWinner))
+                      )}}
+                        <span class="badge badge-dark font-size-100">
                           {{value}}
-                        {{/if}}
+                        </span>
                       {{else}}
                         {{value}}
                       {{/if}}
@@ -49,7 +59,11 @@
 <div class="row">
   <div class="col text-center">
     <div class={{unless hideComputerCard "d-none"}}>
-      <button type="button" name="button" class="btn btn-lg mt-3 mb-5" onclick={{action "play" shuffledModel selectedProperty}}>
+      <button
+        type="button"
+        name="button"
+        class="btn btn-lg mt-3 mb-5"
+        onclick={{action "play" shuffledModel selectedProperty}}>
         PLAY
       </button>
     </div>
@@ -58,6 +72,6 @@
 
 <div class="row">
   <div class="col text-center">
-    <p class="display-block mt-2">{{result}}</p>
+    <p class="display-block mt-2 gold">{{result}}</p>
   </div>
 </div>

@@ -12,68 +12,65 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   const starships = [
     EmberObject.create({
       name: 'Millenium Falcon',
-      crew: '5',
-      length: '300',
-      passengers: '2',
-      hyperdrive_rating: '3',
-      cost_in_credits: '10000',
-      cargo_capacity: '2000'
+      properties: {
+        Name: 'Millenium Falcon',
+        Crew: '5',
+        Length: '300',
+        Passengers: '2',
+        'Hyperdrive Rating': '3',
+        'Cost in Credits': '10000',
+        'Cargo Capacity': '2000'
+      }
     }),
     EmberObject.create({
       name: 'X Wing Fighter',
-      crew: '1',
-      length: '100',
-      passengers: '1',
-      hyperdrive_rating: '1',
-      cost_in_credits: '2000',
-      cargo_capacity: '10'
+      properties: {
+        Name: 'X Wing Fighter',
+        Crew: '1',
+        Length: '100',
+        Passengers: '1',
+        'Hyperdrive Rating': '1',
+        'Cost in Credits': '2000',
+        'Cargo Capacity': '10'
+      }
     })
   ];
 
   const starshipsModel = A(starships);
 
   test('it displays card correctly for player', async function(assert) {
-    const columnLeft = '.row .col-sm-10:nth-child(1) tbody tr:nth-child';
-
     this.set('model', starshipsModel);
-    this.set('leftPlayerScore', 0);
-    this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
-        @game="starships"
-        @selectedAttr="crew"
+        @selectedProperty="Crew"
         @model={{model}}
-        @leftPlayerScore={{leftPlayerScore}}
-        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
 
-    assert.expect(15);
+    assert.expect(14);
     assert.equal(
-      this.element.querySelector('.row .col-sm-10:nth-child(1) h3').textContent.trim(),
+      this.element.querySelector('[data-test-card-name="0"]').textContent.trim(),
       'Millenium Falcon',
       'Correct name is shown');
 
-    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h3').textContent.trim(), 'Millenium Falcon', 'Correct name is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Crew Player 0"]').textContent.trim(), 'Crew', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Crew Player 0"]').textContent.trim(), '5', 'Correct crew is shown');
 
-    assert.equal(this.element.querySelector(`${columnLeft}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(1) td`).textContent.trim(), '5', 'Correct crew is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Length Player 0"]').textContent.trim(), 'Length', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Length Player 0"]').textContent.trim(), '300', 'Correct length is shown')
 
-    assert.equal(this.element.querySelector(`${columnLeft}(2) th`).textContent.trim(), 'Length', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(2) td`).textContent.trim(), '300', 'Correct length is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Hyperdrive Rating Player 0"]').textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Hyperdrive Rating Player 0"]').textContent.trim(), '3', 'Correct hyperdrive rating is shown');
 
-    assert.equal(this.element.querySelector(`${columnLeft}(3) th`).textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(3) td`).textContent.trim(), '3', 'Correct hyperdrive rating is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Passengers Player 0"]').textContent.trim(), 'Passengers', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Passengers Player 0"]').textContent.trim(), '2', 'Correct passengers is shown')
 
-    assert.equal(this.element.querySelector(`${columnLeft}(4) th`).textContent.trim(), 'Passengers', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(4) td`).textContent.trim(), '2', 'Correct passengers is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Cost in Credits Player 0"]').textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Cost in Credits Player 0"]').textContent.trim(), '10000', 'Correct cost is shown');
 
-    assert.equal(this.element.querySelector(`${columnLeft}(5) th`).textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(5) td`).textContent.trim(), '10000', 'Correct cost is shown');
-
-    assert.equal(this.element.querySelector(`${columnLeft}(6) th`).textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnLeft}(6) td`).textContent.trim(), '2000', 'Correct capacity is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Cargo Capacity Player 0"]').textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Cargo Capacity Player 0"]').textContent.trim(), '2000', 'Correct capacity is shown');
 
     return a11yAudit(this.element).then(() => {
       assert.ok(true, 'No a11y errors found!');
@@ -81,43 +78,36 @@ module('Integration | Component | Game Container | Starships', function(hooks) {
   });
 
   test('it displays the computer card and correct winner', async function(assert) {
-    const columnRight = '.row .col-sm-10:nth-child(2) tbody tr:nth-child';
-
     this.set('model', starshipsModel);
-    this.set('leftPlayerScore', 0);
-    this.set('rightPlayerScore', 0);
 
     await render(hbs`
       <GameContainer
-        @game="starships"
-        @selectedAttr="crew"
+        @selectedProperty="Crew"
         @model={{model}}
-        @leftPlayerScore={{leftPlayerScore}}
-        @rightPlayerScore={{rightPlayerScore}}
       />
     `);
 
     await click('.btn');
 
-    assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(2) h3').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
+    assert.equal(this.element.querySelector('[data-test-card-name="1"]').textContent.trim(), 'X Wing Fighter', 'Correct name is shown');
 
-    assert.equal(this.element.querySelector(`${columnRight}(1) th`).textContent.trim(), 'Crew', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(1) td`).textContent.trim(), '1', 'Correct crew is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Crew Player 1"]').textContent.trim(), 'Crew', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Crew Player 1"]').textContent.trim(), '1', 'Correct crew is shown');
 
-    assert.equal(this.element.querySelector(`${columnRight}(2) th`).textContent.trim(), 'Length', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(2) td`).textContent.trim(), '100', 'Correct length is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Length Player 1"]').textContent.trim(), 'Length', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Length Player 1"]').textContent.trim(), '100', 'Correct length is shown')
 
-    assert.equal(this.element.querySelector(`${columnRight}(3) th`).textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(3) td`).textContent.trim(), '1', 'Correct hyperdrive rating is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Hyperdrive Rating Player 1"]').textContent.trim(), 'Hyperdrive Rating', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Hyperdrive Rating Player 1"]').textContent.trim(), '1', 'Correct hyperdrive rating is shown');
 
-    assert.equal(this.element.querySelector(`${columnRight}(4) th`).textContent.trim(), 'Passengers', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(4) td`).textContent.trim(), '1', 'Correct passengers is shown')
+    assert.equal(this.element.querySelector('[data-test-property-name="Passengers Player 1"]').textContent.trim(), 'Passengers', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Passengers Player 1"]').textContent.trim(), '1', 'Correct passengers is shown')
 
-    assert.equal(this.element.querySelector(`${columnRight}(5) th`).textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(5) td`).textContent.trim(), '2000', 'Correct cost is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Cost in Credits Player 1"]').textContent.trim(), 'Cost in Credits', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Cost in Credits Player 1"]').textContent.trim(), '2000', 'Correct cost is shown');
 
-    assert.equal(this.element.querySelector(`${columnRight}(6) th`).textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
-    assert.equal(this.element.querySelector(`${columnRight}(6) td`).textContent.trim(), '10', 'Correct capacity is shown');
+    assert.equal(this.element.querySelector('[data-test-property-name="Cargo Capacity Player 1"]').textContent.trim(), 'Cargo Capacity', 'Correct table heading is shown');
+    assert.equal(this.element.querySelector('[data-test-property-value="Cargo Capacity Player 1"]').textContent.trim(), '10', 'Correct capacity is shown');
 
     assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h2 span:nth-child(1)').textContent.trim(), 'Player :', 'Player heading shown');
     assert.equal(this.element.querySelector('.row .col-sm-10:nth-child(1) h2 span:nth-child(2)').textContent.trim(), '1', 'Correct score shown');
