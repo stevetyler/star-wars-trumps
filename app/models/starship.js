@@ -5,11 +5,11 @@ export default Model.extend({
   init() {
     this._super(...arguments);
     this.set('properties', {
-      'Passengers': this.get('passengers'),
-      'Length': this.get('length'),
-      'Hyperdrive Rating': this.get('hyperdrive_rating'),
-      'Cost in Credits': this.get('cost_in_credits'),
-      'Cargo Capacity': this.get('cargo_capacity'),
+      'Passengers': this.passengers,
+      'Length': this.length,
+      'Hyperdrive Rating': this.hyperdrive_rating,
+      'Cost in Credits': this.cost_in_credits,
+      'Cargo Capacity': this.cargo_capacity,
     })
   },
   name: DS.attr('string'),

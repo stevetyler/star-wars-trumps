@@ -6,7 +6,7 @@ import config from 'star-wars-trumps/config/environment';
 
 export default Component.extend({
   init() {
-    const shuffledModel = this.get('shuffledModel');
+    const shuffledModel = this.shuffledModel;
     this._super(...arguments);
     this._deal(shuffledModel);
   },
@@ -92,7 +92,7 @@ export default Component.extend({
 
   actions: {
     play(shuffledModel, property) {
-      const collection = this.get('collection');
+      const collection = this.collection;
 
       this._compareAttrs(collection[this.gameCount], property);
 
